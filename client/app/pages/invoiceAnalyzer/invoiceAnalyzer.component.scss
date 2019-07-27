@@ -59,6 +59,32 @@
     text-align: center;
 }
 
+.centered-block{
+    display: inline-block;
+}
+
 .centered img {
     width: 500px;
+}
+
+.abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-wrap {
+    text-align: center;
+    .input-wrap {
+        margin: 20px 0;
+    }
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
+input.mat-input-element{
+    color: #e3e3e3;
+    margin-left: 5px;
 }

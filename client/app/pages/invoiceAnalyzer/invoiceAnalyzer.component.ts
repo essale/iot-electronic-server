@@ -21,9 +21,9 @@ export class InvoiceAnalyzerComponent implements OnInit {
     invoiceForm: FormGroup;
     imagePath;
     suppliers;
-    isLoading = true;
     img: any;
     message: string;
+    isLoading = false;
 
     lang: 'heb';
 
@@ -71,8 +71,6 @@ export class InvoiceAnalyzerComponent implements OnInit {
 
         this.suppliers = this.supplierService.getSuppliers();
         console.log(this.suppliers);
-
-        this.isLoading = false;
     }
 
     submit() {
@@ -116,8 +114,11 @@ export class InvoiceAnalyzerComponent implements OnInit {
 
         Tesseract
             .recognize(file, config)
-            // .progress(console.log)
+            .progress(() => {
+                this.isLoading = true;
+            })
             .then((res: any) => {
+                this.isLoading = false;
 
                 if (config.lang === ('heb')) {
                     this.parseHeb(res);
@@ -133,7 +134,7 @@ export class InvoiceAnalyzerComponent implements OnInit {
             console.log(reader.result);
             const parameter = {image: reader.result, imageName: file.name, username: username, lang: 'heb'};
             console.log(parameter);
-            //this.invoiceService.uploadImage(parameter);
+            // this.invoiceService.uploadImage(parameter);
         };
         reader.onerror = function (error) {
             console.log('Error: ', error);
@@ -160,9 +161,8 @@ export class InvoiceAnalyzerComponent implements OnInit {
         }*/
 
 
-
         // Date regex (i.g. 31.12.2019)
-        for (let i = 0 ; i < tes.words.length; i++ ) {
+        for (let i = 0; i < tes.words.length; i++) {
             const word = tes.words[i].text;
 
             const isMatch = word.match(/^([0-2][0-9]|(3)[0-1])(\/|.|-)(((0)[0-9])|((1)[0-2]))(\/|.|-)(\d{4}$|\d{2}$)/i);

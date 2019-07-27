@@ -1,6 +1,9 @@
-<app-loading [condition]="isLoading"></app-loading>
+<div class="abs-center" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
 
-<div [hidden]="isLoading" class="container">
+
+<div class="container">
     <div class="split left">
         <div class="row centered">
             <div class="col-md-12 col-centered">
@@ -13,7 +16,6 @@
               </span>
                                 <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceId"
                                        [formControl]="invoiceId" placeholder="Invoice ID">
-                                <mat-hint align="end">{{ input.value?.length || 0 }}/30</mat-hint>
                                 <mat-error *ngIf="invoiceId.hasError('minlength')">
                                     Invoice ID must contain at least 5 characters
                                 </mat-error>
@@ -30,7 +32,6 @@
               </span>
                                 <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceId"
                                        [formControl]="supplierName" placeholder="Supplier Name">
-                                <mat-hint align="end">{{ input.value?.length || 0 }}/30</mat-hint>
                                 <mat-error *ngIf="invoiceId.hasError('minlength')">
                                     Supplier Name must contain at least 5 characters
                                 </mat-error>
@@ -45,7 +46,7 @@
                                   <span matPrefix>
                                     <i class="prefix fa fa-user"></i>
                                   </span>
-                                <input matInput #input type="text" name="invoiceId" [formControl]="totalPayment"
+                                <input matInput type="text" name="totalPayment" [formControl]="totalPayment"
                                        placeholder="Total Payment">
                                 <mat-error *ngIf="totalPayment.hasError('required')">
                                     Total Payment Name is
@@ -56,9 +57,9 @@
                         <div class="input-wrap">
                             <mat-form-field>
                               <span matPrefix>
-                                <i class="prefix fa fa-calendar"></i>
+                                <i class="prefix fa fa-user"></i>
                               </span>
-                                <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceDate"
+                                <input matInput type="text" minlength="5" maxlength="30" name="invoiceDate"
                                        [formControl]="invoiceDate" placeholder="Invoice Date">
                                 <mat-error *ngIf="invoiceDate.hasError('required')">
                                     Invoice Date is
@@ -66,7 +67,7 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <button mat-raised-button type="submit" color="accent">
+                        <button mat-raised-button type="submit" [disabled]="!invoiceForm.valid" color="accent">
                             <i class="fa fa-paper-plane"></i> Submit
                         </button>
                     </form>
@@ -75,9 +76,12 @@
         </div>
     </div>
     <div class="split right col-md-12">
-        <div class="row centered">
-            <h3>Angular 7 Image Preview before Upload:</h3>
-            <span style="color:red;" *ngIf="message">{{message}}</span>
+
+        <div class="row centered centered-block">
+            <h3>Analyzer: upload image</h3>
+            <span *ngIf="message">{{message}}</span>
+        </div>
+        <div class="row centered centered-block">
             <input #file type="file" name="image" (change)="upload(file.files)"/>
             <img [src]="img" height="200" *ngIf="img">
         </div>
