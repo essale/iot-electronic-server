@@ -130,8 +130,8 @@ export class SuppliersComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.width = "60%";
+        this.dialog.afterAllClosed.subscribe(data => this.getSuppliers());
         this.dialog.open(CreateSupplierComponent, dialogConfig);
-        // TODO: need to refresh the table after creation to see the new row.
     }
 
     onEdit(supplier: Supplier) {

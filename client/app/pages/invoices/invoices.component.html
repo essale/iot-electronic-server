@@ -14,7 +14,7 @@
           <!-- Username Column -->
           <ng-container matColumnDef="username">
             <mat-header-cell *matHeaderCellDef>
-              <span mat-sort-header>Username</span>
+              <span mat-sort-header>User</span>
               <mat-form-field floatLabel="never">
                 <mat-label>Search</mat-label>
                 <input matInput [formControl]="usernameFilter">
@@ -26,10 +26,10 @@
           <!-- InvoiceId Column -->
           <ng-container matColumnDef="invoiceId">
             <mat-header-cell *matHeaderCellDef>
-              <span mat-sort-header>InvoiceId</span>
+              <span mat-sort-header>Invoice Id</span>
               <mat-form-field floatLabel="never">
                 <mat-label>Search</mat-label>
-                <input matInput [formControl]="supplierNameFilter">
+                <input matInput [formControl]="invoiceIdFilter">
               </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let invoice"> {{ invoice.invoiceId }} </mat-cell>
@@ -71,21 +71,9 @@
             <mat-cell *matCellDef="let invoice"> {{ invoice.invoiceDate }} </mat-cell>
           </ng-container>
 
-          <!-- SupplierName Column -->
-          <ng-container matColumnDef="createdAt">
-            <mat-header-cell *matHeaderCellDef>
-              <span mat-sort-header>Supplier Name</span>
-              <mat-form-field floatLabel="never">
-                <mat-label>Search</mat-label>
-                <input matInput [formControl]="createdAtFilter">
-              </mat-form-field>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let invoice"> {{ invoice.createdAt }} </mat-cell>
-          </ng-container>
-          
           <!-- Action Column -->
           <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
             <mat-cell *matCellDef="let invoice">
               <button mat-icon-button color="warn" class="btn btn-sm btn-danger" (click)="deleteInvoice(invoice)">
                 <i class="fa fa-trash"></i>
