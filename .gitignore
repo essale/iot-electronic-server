@@ -62,3 +62,11 @@ typings/
 # next.js build output
 .next
 .DS_Store
+
+# dist folder
+dist
+
+# general
+comment.js.map
+workspace.xml
+package-lock.json
