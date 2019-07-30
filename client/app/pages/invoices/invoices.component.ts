@@ -17,19 +17,21 @@ export class InvoicesComponent implements OnInit {
     title = 'My Invoices';
     invoices: Invoice[] = [];
     isLoading = true;
-    displayedColumns = ['username', 'invoiceId', 'supplierName', 'totalPayment', 'invoiceDate', 'createdAt'];
+    displayedColumns = ['username', 'invoiceId', 'supplierName', 'totalPayment', 'invoiceDate', 'action'];
     dataSource: any;
     filterValues = {
         username: '',
+        invoiceId: '',
         supplierName: '',
-        createdAt: ''
+        totalPayment: '',
+        invoiceDate: ''
     };
 
     usernameFilter = new FormControl('');
+    invoiceIdFilter = new FormControl('');
     supplierNameFilter = new FormControl('');
     totalPaymentFilter = new FormControl('');
     invoiceDateFilter = new FormControl('');
-    createdAtFilter = new FormControl('');
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -51,17 +53,31 @@ export class InvoicesComponent implements OnInit {
                     this.dataSource.filter = JSON.stringify(this.filterValues);
                 }
             );
-        this.supplierNameFilter.valueChanges
+        this.invoiceIdFilter.valueChanges
             .subscribe(
                 value => {
-                    this.filterValues.createdAt = value;
+                    this.filterValues.invoiceId = value;
                     this.dataSource.filter = JSON.stringify(this.filterValues);
                 }
             );
-        this.createdAtFilter.valueChanges
+        this.supplierNameFilter.valueChanges
             .subscribe(
                 value => {
-                    this.filterValues.createdAt = value;
+                    this.filterValues.supplierName = value;
+                    this.dataSource.filter = JSON.stringify(this.filterValues);
+                }
+            );
+        this.totalPaymentFilter.valueChanges
+            .subscribe(
+                value => {
+                    this.filterValues.totalPayment = value;
+                    this.dataSource.filter = JSON.stringify(this.filterValues);
+                }
+            );
+        this.invoiceDateFilter.valueChanges
+            .subscribe(
+                value => {
+                    this.filterValues.invoiceDate = value;
                     this.dataSource.filter = JSON.stringify(this.filterValues);
                 }
             );

@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ToastComponent} from '../../shared/toast/toast.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastComponent } from '../../shared/toast/toast.component';
 import { AuthService } from '../../services/auth.service';
-import {Supplier} from '../../shared/models/supplier.model';
-import {ConfirmationDialogComponent} from '../../shared/confirm/confirmation-dialog';
-import {MatDialog, MatDialogConfig, MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
-import {FormControl} from '@angular/forms';
-import {SupplierService} from '../../services/supplier.service';
+import { Supplier } from '../../shared/models/supplier.model';
+import { ConfirmationDialogComponent } from '../../shared/confirm/confirmation-dialog';
+import { MatDialog, MatDialogConfig, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { SupplierService } from '../../services/supplier.service';
 import { CreateSupplierComponent } from '../createSupplier/createSupplier.component';
 
 @Component({
@@ -20,17 +20,19 @@ export class SuppliersComponent implements OnInit {
     suppliers: Supplier[] = [];
     isLoading = true;
     hllCounter: number = 0;
-    displayedColumns = ['supplierName', 'email', 'phoneNumber', 'action'];
+    displayedColumns = ['supplierName', 'email', 'phoneNumber', 'address', 'action'];
     dataSource: any;
 
     filterValues = {
         supplierName: '',
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        address: ''
     };
     supplierNameFilter = new FormControl('');
     emailFilter = new FormControl('');
     phoneFilter = new FormControl('');
+    addressFilter = new FormControl('');
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -64,6 +66,13 @@ export class SuppliersComponent implements OnInit {
             .subscribe(
                 value => {
                     this.filterValues.phoneNumber = value;
+                    this.dataSource.filter = JSON.stringify(this.filterValues);
+                }
+            );
+        this.addressFilter.valueChanges
+            .subscribe(
+                value => {
+                    this.filterValues.address = value;
                     this.dataSource.filter = JSON.stringify(this.filterValues);
                 }
             );
@@ -112,7 +121,7 @@ export class SuppliersComponent implements OnInit {
     }
 
     onDelete(supplier: Supplier) {
-        var dialogRef = this.dialog.open(ConfirmationDialogComponent, {disableClose: false});
+        var dialogRef = this.dialog.open(ConfirmationDialogComponent, { disableClose: false });
         dialogRef.componentInstance.title = 'Delete Supplier';
         dialogRef.componentInstance.message = 'Are you sure you want to delete ' + supplier.supplierName + '?';
         dialogRef.afterClosed().subscribe(result => {
@@ -130,12 +139,11 @@ export class SuppliersComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.width = "60%";
+        this.dialog.afterAllClosed.subscribe(data => this.getSuppliers());
         this.dialog.open(CreateSupplierComponent, dialogConfig);
-        // TODO: need to refresh the table after creation to see the new row.
     }
 
     onEdit(supplier: Supplier) {
         // TODO: need to create edit form
     }
 }
-

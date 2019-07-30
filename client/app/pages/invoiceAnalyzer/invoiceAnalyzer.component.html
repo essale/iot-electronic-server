@@ -76,14 +76,11 @@
         </div>
     </div>
     <div class="split right col-md-12">
-
-        <div class="row centered centered-block">
-            <h3>Analyzer: upload image</h3>
-            <span *ngIf="message">{{message}}</span>
-        </div>
-        <div class="row centered centered-block">
-            <input #file type="file" name="image" (change)="upload(file.files)"/>
-            <img [src]="img" height="200" *ngIf="img">
+        <div class="row">
+            <div class="centered-block-down">
+                <input #file type="file" class="custom-file-input" name="image" (change)="upload(file.files)"/>
+                <img [src]="img" height="200" *ngIf="img">
+            </div>
         </div>
     </div>
 </div>
