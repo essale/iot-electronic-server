@@ -1,11 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import {UserService} from '../../services/user.service';
-import {ToastComponent} from '../../shared/toast/toast.component';
-import {SupplierService} from '../../services/supplier.service';
-import {MatDialogRef} from '@angular/material';
+import { ToastComponent } from '../../shared/toast/toast.component';
+import { SupplierService } from '../../services/supplier.service';
+import { MatDialogRef } from '@angular/material';
 
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -24,7 +22,7 @@ export class CreateSupplierComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9_-\\s]*')
+        Validators.pattern('[א-תa-zA-Z0-9_-\\s]*')
     ]);
     email = new FormControl('', [
         Validators.required,
@@ -36,7 +34,7 @@ export class CreateSupplierComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9_-\\s]*')
+        Validators.pattern('[א-תa-zA-Z0-9_-\\s]*')
     ]);
     phoneNumber = new FormControl('', [
         Validators.required,
@@ -47,7 +45,6 @@ export class CreateSupplierComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router,
         public toast: ToastComponent,
         private supplierService: SupplierService,
         public dialogRef: MatDialogRef<CreateSupplierComponent>

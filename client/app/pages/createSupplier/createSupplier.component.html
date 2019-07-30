@@ -9,11 +9,11 @@
 
                     <div class="input-wrap">
                         <mat-form-field>
-              <span matPrefix>
-                <i class="prefix fa fa-user"></i>
-              </span>
+                            <span matPrefix>
+                                <i class="prefix fa fa-user"></i>
+                            </span>
                             <input matInput #input type="text" minlength="2" maxlength="30" name="supplierName"
-                                   [formControl]="supplierName" placeholder="Supplier Name">
+                                [formControl]="supplierName" placeholder="Supplier Name">
                             <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="supplierName.hasError('minlength')">
                                 Supplier name must contain at least 2 characters
@@ -30,9 +30,9 @@
 
                     <div class="input-wrap">
                         <mat-form-field>
-              <span matPrefix>
-                <i class="prefix fa fa-envelope"></i>
-              </span>
+                            <span matPrefix>
+                                <i class="prefix fa fa-envelope"></i>
+                            </span>
                             <input matInput type="email" name="email" [formControl]="email" placeholder="Email Address">
                             <mat-error *ngIf="email.hasError('pattern')">
                                 Please enter a valid email address
@@ -46,11 +46,11 @@
 
                     <div class="input-wrap">
                         <mat-form-field>
-              <span matPrefix>
-                <i class="prefix fa fa-user"></i>
-              </span>
+                            <span matPrefix>
+                                <i class="prefix fa fa-user"></i>
+                            </span>
                             <input matInput #input type="text" minlength="2" maxlength="30" name="address"
-                                   [formControl]="address" placeholder="Address">
+                                [formControl]="address" placeholder="Address">
                             <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="address.hasError('minlength')">
                                 address must contain at least 2 characters
@@ -63,11 +63,11 @@
 
                     <div class="input-wrap">
                         <mat-form-field>
-              <span matPrefix>
-                <i class="prefix fa fa-user"></i>
-              </span>
+                            <span matPrefix>
+                                <i class="prefix fa fa-user"></i>
+                            </span>
                             <input matInput #input type="number" minlength="2" maxlength="30" name="phoneNumber"
-                                   [formControl]="phoneNumber" placeholder="Phone Number">
+                                [formControl]="phoneNumber" placeholder="Phone Number">
                             <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="phoneNumber.hasError('minlength')">
                                 Phone number must contain at least 2 characters
