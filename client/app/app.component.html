@@ -73,10 +73,16 @@
 </header>
 
 <footer>
-    <div class="copy-right">
-        <span class="font_navbar">
-            <i class="far fa-copyright"></i> DOCML
-        </span>
+    <div style="display: flex">
+        <div class="copy-right">
+            <span style="color: black;">
+                <i class="far fa-copyright"></i>DOCML
+            </span>
+        </div>
+        <div class="which-user">
+            <h4 *ngIf="auth.isAdmin" class="user-role">(המשתמש הוא אדמין)</h4>
+            <h4 *ngIf="!auth.isAdmin && auth.loggedIn" class="user-role">(המשתמש לא אדמין)</h4>
+        </div>
     </div>
 </footer>
 </div>
