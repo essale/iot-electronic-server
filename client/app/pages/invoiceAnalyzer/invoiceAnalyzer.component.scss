@@ -1,90 +1,135 @@
 @import '../../../variables';
 
 .page-header {
-    margin: 30px;
-    font-size: $font-large;
-    text-align: center;
-    font-weight: bold;
-    color: $accentCol;
+  margin: 30px;
+  font-size: $font-large;
+  text-align: center;
+  font-weight: bold;
+  color: $accentCol;
 }
 
-.pipes{
-    white-space: pre-wrap;
-    color: $primaryCol;
+.pipes {
+  white-space: pre-wrap;
+  color: $primaryCol;
 }
 
 .mat-header-cell {
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-    display: block;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  display: block;
 }
 
 .prefix {
-    color: $grayCol;
-    margin: 0 5px;
+  color: $grayCol;
+  margin: 0 5px;
 }
 
 .form-wrap {
-    text-align: center;
-    .input-wrap {
-        margin: 20px 0;
-    }
-    .mat-form-field {
-        width: 100%;
-    }
+  text-align: center;
+
+  .input-wrap {
+    margin: 20px 0;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
 }
 
 .left {
-    left: 0;
+  left: 0;
 }
 
 .right {
-    right: 0;
+  right: 0;
 }
 
 .split {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    z-index: 1;
-    overflow-x: hidden;
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
 }
 
 .centered {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.centered-block{
-    display: inline-block;
+.centered-block-down {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered-block-down img {
+  width: 500px;
 }
 
 .centered img {
-    width: 500px;
+  width: 500px;
 }
 
 .abs-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-wrap {
-    text-align: center;
-    .input-wrap {
-        margin: 20px 0;
-    }
-    .mat-form-field {
-        width: 100%;
-    }
+  text-align: center;
+
+  .input-wrap {
+    margin: 20px 0;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
 }
 
-input.mat-input-element{
-    color: #e3e3e3;
-    margin-left: 5px;
+input.mat-input-element {
+  color: #e3e3e3;
+  margin-left: 5px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom-file-input::before {
+  content: 'Select some files';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #0c0c0c;
+  font-weight: 700;
+  font-size: 10pt;
+
+}
+
+.custom-file-input:hover::before {
+  color: #00b0ff;
+}
+
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+input[type=file] {
+  color: transparent;
 }

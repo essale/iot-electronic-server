@@ -12,10 +12,10 @@
                         <div class="input-warp">
                             <mat-form-field>
                                 <span matPrefix>
-                                    <i class="prefix fa fa-user"></i>
-                                </span>
+                <i class="prefix fa fa-user"></i>
+              </span>
                                 <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceId"
-                                    [formControl]="invoiceId" placeholder="Invoice ID">
+                                       [formControl]="invoiceId" placeholder="Invoice ID">
                                 <mat-error *ngIf="invoiceId.hasError('minlength')">
                                     Invoice ID must contain at least 5 characters
                                 </mat-error>
@@ -27,11 +27,11 @@
                         </div>
                         <div class="input-wrap">
                             <mat-form-field>
-                                <span matPrefix>
-                                    <i class="prefix fa fa-user"></i>
-                                </span>
+              <span matPrefix>
+                <i class="prefix fa fa-user"></i>
+              </span>
                                 <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceId"
-                                    [formControl]="supplierName" placeholder="Supplier Name">
+                                       [formControl]="supplierName" placeholder="Supplier Name">
                                 <mat-error *ngIf="invoiceId.hasError('minlength')">
                                     Supplier Name must contain at least 5 characters
                                 </mat-error>
@@ -43,11 +43,11 @@
                         </div>
                         <div class="input-wrap">
                             <mat-form-field>
-                                <span matPrefix>
+                                  <span matPrefix>
                                     <i class="prefix fa fa-user"></i>
-                                </span>
+                                  </span>
                                 <input matInput type="text" name="totalPayment" [formControl]="totalPayment"
-                                    placeholder="Total Payment">
+                                       placeholder="Total Payment">
                                 <mat-error *ngIf="totalPayment.hasError('required')">
                                     Total Payment Name is
                                     <strong>required</strong>
@@ -56,11 +56,11 @@
                         </div>
                         <div class="input-wrap">
                             <mat-form-field>
-                                <span matPrefix>
-                                    <i class="prefix fa fa-user"></i>
-                                </span>
+                              <span matPrefix>
+                                <i class="prefix fa fa-user"></i>
+                              </span>
                                 <input matInput type="text" minlength="5" maxlength="30" name="invoiceDate"
-                                    [formControl]="invoiceDate" placeholder="Invoice Date">
+                                       [formControl]="invoiceDate" placeholder="Invoice Date">
                                 <mat-error *ngIf="invoiceDate.hasError('required')">
                                     Invoice Date is
                                     <strong>required</strong>
@@ -76,14 +76,11 @@
         </div>
     </div>
     <div class="split right col-md-12">
-
-        <div class="row centered centered-block">
-            <h3>Analyzer: upload image</h3>
-            <span *ngIf="message">{{message}}</span>
-        </div>
-        <div class="row centered centered-block">
-            <input #file type="file" name="image" (change)="upload(file.files)" />
-            <img [src]="img" height="200" *ngIf="img">
+        <div class="row">
+            <div class="centered-block-down">
+                <input #file type="file" class="custom-file-input" name="image" (change)="upload(file.files)"/>
+                <img [src]="img" height="200" *ngIf="img">
+            </div>
         </div>
     </div>
 </div>
