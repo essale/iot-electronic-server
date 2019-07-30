@@ -6,6 +6,7 @@ var invoiceSchema = new mongoose.Schema({
     invoiceId: Number,
     supplierName: String,
     totalPayment: Number,
+    invoiceDate: String,
     createdAt: { type: Date, default: Date.now }
 });
 var Invoice = mongoose.model('Invoice', invoiceSchema);
