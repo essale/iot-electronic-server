@@ -57,9 +57,51 @@ body {
     color: $whiteCol;
 }
 
+// MatTable
+.mat-dialog-container {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .5)),
+    center no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+  }
+
 .mat-table {
     overflow: auto;
     max-height: 500px;
+    background-color: transparent;
+}
+
+.mat-paginator {
+    background-color: transparent;
+}
+
+.mat-cell {
+    color: $whiteCol;
+}
+
+.mat-sort-header-button {
+    color: $whiteCol !important;
+}
+
+.ng-star-inserted {
+    color: $whiteCol !important;
+}
+
+.mat-paginator-icon {
+    color: $whiteCol;
+}
+
+.mat-paginator-range-label {
+    color: $whiteCol;
+}
+
+.mat-select-arrow {
+    color: $whiteCol;
+}
+
+.mat-hint {
+    color: $whiteCol !important;
 }
 
 #app-table {
