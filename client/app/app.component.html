@@ -1,171 +1,64 @@
 <!--asaf case 2-->
 <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet">
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet">
 <div class="home">
-<header>
-    <div class="menu-toggle" id="hamburger">
-        <i class="fas fa-bars"></i>
-    </div>
-    <div class="overlay"></div>
-    <div class="container">
-        <nav>
-            <h1 class="brand"><a href="#" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><span>doc</span>ML</a></h1>
-            <ul class="links-group">
-                <li><a href="#" routerLink="/invoiceAnalyzer" class="link" routerLinkActive="active"
-                       [routerLinkActiveOptions]="{exact:true}">Analyzer</a></li>
-                <li><a href="#" routerLink="/invoices" class="link" routerLinkActive="active"
-                       [routerLinkActiveOptions]="{ exact:true}">Invoices</a></li>
-                <li><a href="#" routerLink="/suppliers" class="link" routerLinkActive="active"
-                       [routerLinkActiveOptions]="{exact:true}">Suppliers</a></li>
-                <li><a href="#" routerLink="/" class="link" routerLinkActive="active"
-                       [routerLinkActiveOptions]="{exact:true}">Statistics</a></li>
-                <li>
-
-                    <!--USers authorization-->
-                    <a href="#" [hidden]="!(auth.loggedIn && !auth.isAdmin)" routerLink="/" class="link"
-                       routerLinkActive="active"
-                       [routerLinkActiveOptions]="{exact:true}"
-                       button [matMenuTriggerFor]="userMenu"
-                    >Settings</a>
-                    <mat-menu #userMenu="matMenu" class="link">
-                        <a mat-menu-item routerLink="/account">
-                            <i class="fa fa-cog"></i>
-                            <span class="font_navbar"> My Account</span>
-                        </a>
-                        <a mat-menu-item routerLink="/logout">
-                            <i class="fa fa-sign-out"></i>
-                            <span class="font_navbar"> Logout</span>
-                        </a>
-                    </mat-menu>
-                    <!--Admin authorization-->
-
-                    <a href="#" [hidden]="!(auth.loggedIn && auth.isAdmin)" [matMenuTriggerFor]="adminMenu"
-                       routerLink="/" class="link" routerLinkActive="active"
-                       [routerLinkActiveOptions]="{exact:true}"
-                       button [matMenuTriggerFor]="adminMenu"
-                    >Settings</a>
-                    <mat-menu #adminMenu="matMenu" class="link">
-                        <a mat-menu-item routerLink="/users">
-                            <i class="fa fa-user"></i>
-                            <span class="font_navbar"> Users</span>
-                        </a>
-                        <a mat-menu-item routerLink="/connected" class="link">
-                            <i class="fa fa-plug"></i>
-                            <span class="font_navbar"> Connected Users</span>
-                        </a>
-                        <a mat-menu-item routerLink="/account">
-                            <i class="fa fa-cog"></i>
-                            <span class="font_navbar"> My Account</span>
-                        </a>
-                        <a mat-menu-item routerLink="/logout">
-                            <i class="fa fa-sign-out"></i>
-                            <span class="font_navbar"> Logout</span>
-                        </a>
-                    </mat-menu>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-
-    <router-outlet></router-outlet>
-
-</header>
-
-<footer>
-    <div style="display: flex">
-        <div class="copy-right">
-            <span style="color: black;">
-                <i class="far fa-copyright"></i>DOCML
-            </span>
+    <header>
+        <div class="menu-toggle" id="hamburger">
+            <i class="fas fa-bars"></i>
         </div>
-        <div class="which-user">
-            <h4 *ngIf="auth.isAdmin" class="user-role">(המשתמש הוא אדמין)</h4>
-            <h4 *ngIf="!auth.isAdmin && auth.loggedIn" class="user-role">(המשתמש לא אדמין)</h4>
+        <div class="overlay"></div>
+        <div class="container">
+            <nav>
+                <h1 class="brand"><a href="#" routerLink="/" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}"><span>doc</span>ML</a></h1>
+                <ul class="links-group">
+                    <li><a href="#" routerLink="/invoiceAnalyzer" class="link" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">Analyzer</a></li>
+                    <li><a href="#" routerLink="/invoices" class="link" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact:true}">Invoices</a></li>
+                    <li><a href="#" routerLink="/suppliers" class="link" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">Suppliers</a></li>
+                    <li><a href="#" routerLink="/statistics" class="link" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">Statistics</a></li>
+                    <li>
+                        <a [matMenuTriggerFor]="adminMenu" class="link" routerLinkActive="active" button>Settings</a>
+                        <mat-menu #adminMenu="matMenu" class="link">
+                            <div [hidden]="!(auth.loggedIn && auth.isAdmin)">
+                                <a mat-menu-item routerLink="/users">
+                                    <i class="fa fa-user"></i>
+                                    <span class="font_navbar"> Users</span>
+                                </a>
+                                <a mat-menu-item routerLink="/connected" class="link">
+                                    <i class="fa fa-plug"></i>
+                                    <span class="font_navbar"> Connected Users</span>
+                                </a>
+                            </div>
+                            <a mat-menu-item routerLink="/account">
+                                <i class="fa fa-cog"></i>
+                                <span class="font_navbar"> My Account</span>
+                            </a>
+                            <a mat-menu-item routerLink="/logout">
+                                <i class="fa fa-sign-out-alt"></i>
+                                <span class="font_navbar"> Logout</span>
+                            </a>
+                        </mat-menu>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>
-</footer>
+        <router-outlet></router-outlet>
+    </header>
+
+    <footer>
+        <div style="display: flex">
+            <div class="copy-right">
+                <span style="color: black;">
+                    <i class="far fa-copyright"></i>DOCML
+                </span>
+            </div>
+            <div class="which-user">
+                <h4 *ngIf="auth.isAdmin" class="user-role">(User role is Admin)</h4>
+            </div>
+        </div>
+    </footer>
 </div>
-
-
-<!--start of ess
-<mat-toolbar color="primary">
-    <a routerLink="/" class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-home"></i>
-        <span>Home |</span>
-    </a>
-    <a routerLink="/invoiceAnalyzer" class="link" routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-video-camera"></i>
-        <span>Analyzer |</span>
-    </a>
-    <a routerLink="/invoices" class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-newspaper-o"></i>
-        <span>Invoices |</span>
-    </a>
-    <a routerLink="/suppliers" class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-user-o"></i>
-        <span>Suppliers |</span>
-    </a>
-    <a routerLink="/" class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-area-chart"></i>
-        <span>Statistics |</span>
-    </a>
-    <a routerLink="/" class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-ranch"></i>
-        <span>Settings |</span>
-    </a>
-
-</mat-toolbar>
-
-<router-outlet></router-outlet>
-<br><br>
-
-end of ess-->
-
-<!--<mat-toolbar color="primary" dir="rtl">
-    <a routerLink="/" class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <i class="fa fa-home"></i>
-        <span>Home</span>
-    </a>
-    <a [hidden]="!(auth.loggedIn && auth.isAdmin)" [matMenuTriggerFor]="adminMenu" class="link">
-        <span>|</span>
-        <i class="fa fa-wrench"></i>
-        <span>Settings</span>
-    </a>
-    <mat-menu #adminMenu="matMenu">
-        <a mat-menu-item routerLink="/users">
-            <i class="fa fa-user"></i>
-            <span> Users</span>
-        </a>
-        <a mat-menu-item routerLink="/connected">
-            <i class="fa fa-plug"></i>
-            <span> Connected Users</span>
-        </a>
-    </mat-menu>
-    <a routerLink="/statistics" class="link" routerLinkActive="active" [hidden]="!auth.loggedIn">
-        <span>|</span>
-        <i class="fa fa-pie-chart"></i>
-        <span>Statistics</span>
-    </a>
-
-
-    <div [hidden]="!auth.loggedIn" class="user-menu">
-        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="link">
-            <i class="fa fa-user"></i>Users Management
-        </button>
-        <mat-menu #userMenu="matMenu">
-            <a mat-menu-item routerLink="/account">
-                <i class="fa fa-cog"></i>
-                <span> Settings</span>
-            </a>
-            <a mat-menu-item routerLink="/logout">
-                <i class="fa fa-sign-out"></i>
-                <span> Logout</span>
-            </a>
-        </mat-menu>
-    </div>
-</mat-toolbar>
-
-
--->
