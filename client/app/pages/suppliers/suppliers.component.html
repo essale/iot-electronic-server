@@ -64,6 +64,42 @@
                         <mat-cell *matCellDef="let supplier"> {{supplier.address}} </mat-cell>
                     </ng-container>
 
+                    <!-- invoiceSchemeDate Column -->
+                    <ng-container matColumnDef="invoiceSchemeDate">
+                        <mat-header-cell *matHeaderCellDef>
+                            <span mat-sort-header>Invoice Date</span>
+                            <mat-form-field floatLabel="never">
+                                <mat-label>Search</mat-label>
+                                <input matInput [formControl]="invoiceSchemeDateFilter">
+                            </mat-form-field>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let supplier"> {{supplier.invoiceSchemeDate}} </mat-cell>
+                    </ng-container>
+
+                    <!-- invoiceSchemeId Column -->
+                    <ng-container matColumnDef="invoiceSchemeId">
+                        <mat-header-cell *matHeaderCellDef>
+                            <span mat-sort-header>Invoice ID</span>
+                            <mat-form-field floatLabel="never">
+                                <mat-label>Search</mat-label>
+                                <input matInput [formControl]="invoiceSchemeIdFilter">
+                            </mat-form-field>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let supplier"> {{supplier.invoiceSchemeId}} </mat-cell>
+                    </ng-container>
+
+                    <!-- invoiceSchemePayment Column -->
+                    <ng-container matColumnDef="invoiceSchemePayment">
+                        <mat-header-cell *matHeaderCellDef>
+                            <span mat-sort-header>Invoice Payment</span>
+                            <mat-form-field floatLabel="never">
+                                <mat-label>Search</mat-label>
+                                <input matInput [formControl]="invoiceSchemePaymentFilter">
+                            </mat-form-field>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let supplier"> {{supplier.invoiceSchemePayment}} </mat-cell>
+                    </ng-container>
+
                     <!-- Action Column -->
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>

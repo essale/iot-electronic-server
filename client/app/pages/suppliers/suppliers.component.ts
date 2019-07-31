@@ -20,19 +20,29 @@ export class SuppliersComponent implements OnInit {
     suppliers: Supplier[] = [];
     isLoading = true;
     hllCounter: number = 0;
-    displayedColumns = ['supplierName', 'email', 'phoneNumber', 'address', 'action'];
+    displayedColumns = ['supplierName', 'email', 'phoneNumber', 'address',
+        // invoiceScheme columns
+        'invoiceSchemeDate', 'invoiceSchemeId', 'invoiceSchemePayment',
+        // Other columns
+        'action'];
     dataSource: any;
 
     filterValues = {
         supplierName: '',
         email: '',
         phoneNumber: '',
-        address: ''
+        address: '',
+        invoiceSchemeDate: '',
+        invoiceSchemeId: '',
+        invoiceSchemePayment: ''
     };
     supplierNameFilter = new FormControl('');
     emailFilter = new FormControl('');
     phoneFilter = new FormControl('');
     addressFilter = new FormControl('');
+    invoiceSchemeDateFilter = new FormControl('');
+    invoiceSchemeIdFilter = new FormControl('');
+    invoiceSchemePaymentFilter = new FormControl('');
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -73,6 +83,27 @@ export class SuppliersComponent implements OnInit {
             .subscribe(
                 value => {
                     this.filterValues.address = value;
+                    this.dataSource.filter = JSON.stringify(this.filterValues);
+                }
+            );
+        this.invoiceSchemeDateFilter.valueChanges
+            .subscribe(
+                value => {
+                    this.filterValues.invoiceSchemeDate = value;
+                    this.dataSource.filter = JSON.stringify(this.filterValues);
+                }
+            );
+        this.invoiceSchemeIdFilter.valueChanges
+            .subscribe(
+                value => {
+                    this.filterValues.invoiceSchemeId = value;
+                    this.dataSource.filter = JSON.stringify(this.filterValues);
+                }
+            );
+        this.invoiceSchemePaymentFilter.valueChanges
+            .subscribe(
+                value => {
+                    this.filterValues.invoiceSchemePayment = value;
                     this.dataSource.filter = JSON.stringify(this.filterValues);
                 }
             );

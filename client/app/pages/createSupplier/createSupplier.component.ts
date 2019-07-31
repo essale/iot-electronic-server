@@ -78,16 +78,14 @@ export class CreateSupplierComponent implements OnInit {
             supplierName: this.supplierName,
             email: this.email,
             address: this.address,
-           phoneNumber: this.phoneNumber,
-           /*  date: this.date,
-            id: this.id,
-            payment: this.payment*/
+            phoneNumber: this.phoneNumber,
             invoiceScheme: this.formBuilder.group({
                 date: this.date,
                 id: this.id,
                 payment: this.payment
             })
-        })};
+        })
+    };
 
     register() {
         this.supplierService.addSupplier(this.registerForm.value).subscribe(
