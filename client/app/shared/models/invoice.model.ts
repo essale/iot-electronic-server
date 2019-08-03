@@ -6,4 +6,5 @@ export class Invoice {
   totalPayment: Number;
   invoiceDate: String;
   createdAt: Date;
+  inShekel: boolean;
 }

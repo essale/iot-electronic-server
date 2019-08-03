@@ -128,5 +128,30 @@ export class InvoicesComponent implements OnInit {
             }
         });
     }
+
+    convertToDollar(invoice: Invoice) {
+        let url = "http://openexchangerates.org/api/latest.json?app_id=d04a1cbf0f14493c973fc7087c0629fb"
+        // @ts-ignore
+        $.get(url).then(function (response) {
+            let priceInput = invoice.totalPayment;
+            // @ts-ignore
+            if (priceInput !== 0 && !isNaN(invoice.totalPayment)) {
+                let usd_ils_rate = response.rates['ILS']
+                if(!invoice.inShekel) {
+                    // @ts-ignore
+                    let amountInUsd = (parseFloat(priceInput) / parseFloat(usd_ils_rate)).toFixed(2)
+                    invoice.totalPayment = new Number(amountInUsd);
+                    invoice.inShekel = true;
+                }
+                else {
+                    // @ts-ignore
+                    let amountInShekel = (parseFloat(priceInput) * parseFloat(usd_ils_rate)).toFixed(2)
+                    invoice.totalPayment = new Number(amountInShekel);
+                    invoice.inShekel = false;
+                }
+            }
+        });
+
+    }
 }
 

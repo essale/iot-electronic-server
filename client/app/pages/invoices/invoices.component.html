@@ -55,7 +55,14 @@
                 <input matInput [formControl]="totalPaymentFilter">
               </mat-form-field>
             </mat-header-cell>
-            <mat-cell *matCellDef="let invoice"> {{ invoice.totalPayment }} </mat-cell>
+            <mat-cell *matCellDef="let invoice">{{ invoice.totalPayment }}
+              <div *ngIf="invoice.inShekel">
+                <button class="dollar" (click)="convertToDollar(invoice)"> <i class="fas fa-dollar-sign"></i></button>
+              </div>
+              <div *ngIf="!invoice.inShekel">
+              <button class="dollar" (click)="convertToDollar(invoice)"> <i class="fas fa-shekel-sign"></i></button>
+              </div>
+            </mat-cell>
           </ng-container>
 
           <!-- InvoiceDate Column -->
