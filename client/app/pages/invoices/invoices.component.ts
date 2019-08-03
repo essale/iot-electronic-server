@@ -5,6 +5,7 @@ import { ConfirmationDialogComponent } from '../../shared/confirm/confirmation-d
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { InvoiceService } from '../../services/invoice.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-invoices',
@@ -38,6 +39,7 @@ export class InvoicesComponent implements OnInit {
 
     constructor(
         public toast: ToastComponent,
+        private authService: AuthService,
         private invoiceService: InvoiceService,
         public dialog: MatDialog
     ) {

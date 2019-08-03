@@ -100,9 +100,14 @@ body {
     color: $whiteCol;
 }
 
+.mat-input-element {
+    color: $whiteCol !important;
+}
+
 .mat-hint {
     color: $whiteCol !important;
 }
+
 
 #app-table {
     padding-top: 0px;

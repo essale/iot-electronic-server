@@ -21,7 +21,8 @@
                     <li><a href="#" routerLink="/statistics" class="link" routerLinkActive="active"
                             [routerLinkActiveOptions]="{exact:true}">Statistics</a></li>
                     <li>
-                        <a [matMenuTriggerFor]="adminMenu" class="link" routerLinkActive="active" button>Settings</a>
+                        <a [matMenuTriggerFor]="adminMenu" class="link" routerLinkActive="active"
+                            [hidden]="!auth.loggedIn" button>Settings</a>
                         <mat-menu #adminMenu="matMenu" class="link">
                             <div [hidden]="!(auth.loggedIn && auth.isAdmin)">
                                 <a mat-menu-item routerLink="/users">
