@@ -9,7 +9,7 @@
         <div class="overlay"></div>
         <div class="container">
             <nav>
-                <h1 class="brand"><a href="#" routerLink="/" routerLinkActive="active"
+                <h1 class="brand"><a class="sub-brand" href="#" routerLink="/" routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}"><span>doc</span>ML</a></h1>
                 <ul class="links-group">
                     <li><a href="#" routerLink="/invoiceAnalyzer" class="link" routerLinkActive="active"
@@ -25,11 +25,11 @@
                             [hidden]="!auth.loggedIn" button>Settings</a>
                         <mat-menu #adminMenu="matMenu" class="link">
                             <div [hidden]="!(auth.loggedIn && auth.isAdmin)">
-                                <a mat-menu-item routerLink="/users">
+                                <a color="primary" mat-menu-item routerLink="/users">
                                     <i class="fa fa-user"></i>
                                     <span class="font_navbar"> Users</span>
                                 </a>
-                                <a mat-menu-item routerLink="/connected" class="link">
+                                <a mat-menu-item routerLink="/connected">
                                     <i class="fa fa-plug"></i>
                                     <span class="font_navbar"> Connected Users</span>
                                 </a>

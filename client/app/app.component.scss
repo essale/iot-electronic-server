@@ -17,32 +17,12 @@
   }
 }
 
-/*
-.user-menu {
-    position: absolute;
-    left: 0;
-    i {
-        font-size: $font-regular;
-    }
-}*/
-
-
-.font_navbar {
-  color: black;
-}
-
 .copy-right {
   border: 2px solid;
   padding: 10px;
   border-radius: 25px;
   width: 105px;
   color: crimson
-}
-
-.fa {
-  margin-left: 5px;
-  margin-right: 5px;
-  color: black;
 }
 
 * {
@@ -56,7 +36,7 @@ html {
   font-family: "Roboto Cn", sans-serif;
 }
 
-a {
+.sub-brand {
   text-decoration: none;
   color: #eee;
 }

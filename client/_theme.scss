@@ -1,76 +1,17 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$md-light-pink: (
-        50:#FCE4EC,
-        100:#F8BBD0,
-        200:#F48FB1,
-        300:#F06292,
-        400:#EC407A,
-        500:#E91E63,
-        600:#D81B60,
-        700:#C2185B,
-        800:#AD1457,
-        900:#880E4F,
-        A100:#FF80AB,
-        A200:#FF4081,
-        A400:#F50057,
-        A700:#C51162,
-        contrast: (
-                50: $dark-primary-text,
-                100: $dark-primary-text,
-                200: $dark-primary-text,
-                300: $dark-primary-text,
-                400: $dark-primary-text,
-                500: $light-primary-text,
-                600: $light-primary-text,
-                700: $light-primary-text,
-                800: $light-primary-text,
-                900: $light-primary-text,
-                A100: $dark-primary-text,
-                A200: $dark-primary-text,
-                A400: $dark-primary-text,
-                A700: $light-primary-text,
-        )
-);
+$primary: mat-palette($mat-deep-purple);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
 
-
-$md-blue-grey: (
-        50: #eceff1,
-        100: #cfd8dc,
-        200: #b0bec5,
-        300: #90a4ae,
-        400: #78909c,
-        500: #607d8b,
-        600: #546e7a,
-        700: #455a64,
-        800: #37474f,
-        900: #263238,
-        A100: #cfd8dc,
-        A200: #b0bec5,
-        A400: #78909c,
-        A700: #455a64,
-        contrast: (
-                50: $dark-primary-text,
-                100: $dark-primary-text,
-                200: $dark-primary-text,
-                300: $dark-primary-text,
-                400: $light-primary-text,
-                500: $light-primary-text,
-                600: $light-primary-text,
-                700: $light-primary-text,
-                800: $light-primary-text,
-                900: $light-primary-text,
-                A100: $dark-primary-text,
-                A200: $dark-primary-text,
-                A400: $light-primary-text,
-                A700: $light-primary-text,
-        )
-);
-
-
-$primary: mat-palette($md-blue-grey, 500);
-$accent : mat-palette($md-light-pink);
 $theme: mat-light-theme($primary, $accent);
 
 @include angular-material-theme($theme);
+
+$dark-primary: mat-palette($mat-pink, 700, 500, 900);
+$dark-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@include angular-material-theme($dark-theme);

@@ -50,15 +50,15 @@
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
                         <mat-cell *matCellDef="let user">
-                            <button mat-icon-button color="warn" *ngIf="user.role == 'admin'"
+                            <button mat-icon-button color="primary" *ngIf="user.role == 'admin'"
                                 class="btn btn-sm btn-danger" (click)="toggleAdmin(user)"
                                 [disabled]="auth.currentUser._id === user._id">
-                                <i class="fa fa-minus"></i>
+                                <i class="fa fa-lock"></i>
                             </button>
                             <button mat-icon-button color="primary" *ngIf="user.role != 'admin'"
                                 class="btn btn-sm btn-danger" (click)="toggleAdmin(user)"
                                 [disabled]="auth.currentUser._id === user._id">
-                                <i class="fa fa-plus"></i>
+                                <i class="fa fa-lock-open"></i>
                             </button>
                             <button mat-icon-button color="warn" class="btn btn-sm btn-danger"
                                 (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
