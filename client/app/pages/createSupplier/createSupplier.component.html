@@ -12,9 +12,9 @@
                             <span matPrefix>
                                 <i class="prefix fa fa-user"></i>
                             </span>
-                            <input matInput #input type="text" minlength="2" maxlength="30" name="supplierName"
+                            <input matInput #supinput type="text" minlength="2" maxlength="30" name="supplierName"
                                 [formControl]="supplierName" placeholder="Supplier Name">
-                            <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                            <mat-hint align="end">{{supinput.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="supplierName.hasError('minlength')">
                                 Supplier name must contain at least 2 characters
                             </mat-error>
@@ -49,9 +49,9 @@
                             <span matPrefix>
                                 <i class="prefix fa fa-user"></i>
                             </span>
-                            <input matInput #input type="text" minlength="2" maxlength="30" name="address"
+                            <input matInput #addressinput type="text" minlength="2" maxlength="30" name="address"
                                 [formControl]="address" placeholder="Address">
-                            <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                            <mat-hint align="end">{{addressinput.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="address.hasError('minlength')">
                                 address must contain at least 2 characters
                             </mat-error>
@@ -66,9 +66,9 @@
                             <span matPrefix>
                                 <i class="prefix fa fa-user"></i>
                             </span>
-                            <input matInput #input type="number" minlength="2" maxlength="30" name="phoneNumber"
+                            <input matInput #phoneinput type="number" minlength="2" maxlength="30" name="phoneNumber"
                                 [formControl]="phoneNumber" placeholder="Phone Number">
-                            <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                            <mat-hint align="end">{{phoneinput.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="phoneNumber.hasError('minlength')">
                                 Phone number must contain at least 2 characters
                             </mat-error>
@@ -78,16 +78,14 @@
                         </mat-form-field>
                     </div>
 
-                    <!--asaf from here-->
-
                     <div formGroupName="invoiceScheme" class="input-wrap">
                         <mat-form-field>
                             <span matPrefix>
                                 <i class="prefix fa fa-calendar"></i>
                             </span>
-                            <input matInput #input type="text" minlength="2" maxlength="30" name="date"
+                            <input matInput #dateinput type="text" minlength="2" maxlength="30" name="date"
                                 formControlName="date" placeholder="Date pattern">
-                            <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                            <mat-hint align="end">{{dateinput.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="date.hasError('minlength')">
                                 Date pattern must contain at least 2 characters
                             </mat-error>
@@ -100,9 +98,9 @@
                             <span matPrefix>
                                 <i class="prefix fa fa-id-card"></i>
                             </span>
-                            <input matInput #input type="text" minlength="2" maxlength="30" name="id_pattern"
+                            <input matInput #idinput type="text" minlength="2" maxlength="30" name="id_pattern"
                                 formControlName="id" placeholder="ID pattern">
-                            <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                            <mat-hint align="end">{{idinput.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="id.hasError('minlength')">
                                 Id pattern must contain at least 2 characters
                             </mat-error>
@@ -115,9 +113,9 @@
                             <span matPrefix>
                                 <i class="prefix fa fa-money"></i>
                             </span>
-                            <input matInput #input type="text" minlength="2" maxlength="30" name="payment_pattern"
+                            <input matInput #payinput type="text" minlength="2" maxlength="30" name="payment_pattern"
                                 formControlName="payment" placeholder="Payment pattern">
-                            <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                            <mat-hint align="end">{{payinput.value?.length || 0}}/30</mat-hint>
                             <mat-error *ngIf="payment.hasError('minlength')">
                                 Payment pattern must contain at least 2 characters
                             </mat-error>
@@ -127,7 +125,6 @@
                         </mat-form-field>
                     </div>
 
-                    <!--asafs end-->
                     <button mat-raised-button type="submit" [disabled]="!registerForm.valid" color="accent">
                         <i class="fa fa-paper-plane"></i> Create
                     </button>
