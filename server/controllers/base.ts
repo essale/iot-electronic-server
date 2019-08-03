@@ -36,10 +36,10 @@ abstract class BaseCtrl {
   // Get by id
   get = (req, res) => {
     this.model.findOne({ _id: req.params.id }, (err, item) => {
-      if (err || item == null) { 
+      if (err || item == null) {
         res.sendStatus(404);
         return console.error(err);
-       }
+      }
       res.status(200).json(item);
     });
   }
@@ -61,9 +61,9 @@ abstract class BaseCtrl {
   // Delete by id
   delete = (req, res) => {
     this.model.findById(req.params.id, function (err, doc) {
-      if (err || doc == null) { 
+      if (err || doc == null) {
         res.sendStatus(404);
-        return console.error(err); 
+        return console.error(err);
       }
       doc.remove();
       res.sendStatus(200);

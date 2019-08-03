@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ToastComponent} from '../../shared/toast/toast.component';
-import {Invoice} from '../../shared/models/invoice.model';
-import {ConfirmationDialogComponent} from '../../shared/confirm/confirmation-dialog';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {FormControl} from '@angular/forms';
-import {InvoiceService} from '../../services/invoice.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastComponent } from '../../shared/toast/toast.component';
+import { Invoice } from '../../shared/models/invoice.model';
+import { ConfirmationDialogComponent } from '../../shared/confirm/confirmation-dialog';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
     selector: 'app-invoices',
@@ -115,7 +115,7 @@ export class InvoicesComponent implements OnInit {
     }
 
     deleteInvoice(invoice: Invoice) {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {disableClose: false});
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, { disableClose: false });
         dialogRef.componentInstance.title = 'Delete User';
         dialogRef.componentInstance.message = 'Are you sure you want to delete ' + invoice.invoiceId + '?';
         dialogRef.afterClosed().subscribe(result => {

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     public toast: ToastComponent,
     private chatService: ChatService
   ) {
-   }
+  }
 
   ngOnInit() {
     if (this.auth.loggedIn) {

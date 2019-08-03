@@ -12,7 +12,7 @@ export class WebsocketService {
     if (!this.subject) {
       this.subject = this.create(url);
       console.log("Successfully connected: " + url);
-    } 
+    }
     return this.subject;
   }
 
@@ -21,7 +21,7 @@ export class WebsocketService {
 
     // send inital token for any connection
     let token = this.auth.getToken();
-    ws.onopen = function() {
+    ws.onopen = function () {
       if (token) {
         let message = {
           type: 'login',
@@ -32,20 +32,20 @@ export class WebsocketService {
     };
 
     let observable = Rx.Observable.create(
-	(obs: Rx.Observer<MessageEvent>) => {
-		ws.onmessage = obs.next.bind(obs);
-		ws.onerror = obs.error.bind(obs);
-		ws.onclose = obs.complete.bind(obs);
-		return ws.close.bind(ws);
-	})
-let observer = {
-		next: (data: Object) => {
-			if (ws.readyState === WebSocket.OPEN) {
-				ws.send(JSON.stringify(data));
-			}
-		}
-	}
-	return Rx.Subject.create(observer, observable);
+      (obs: Rx.Observer<MessageEvent>) => {
+        ws.onmessage = obs.next.bind(obs);
+        ws.onerror = obs.error.bind(obs);
+        ws.onclose = obs.complete.bind(obs);
+        return ws.close.bind(ws);
+      })
+    let observer = {
+      next: (data: Object) => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify(data));
+        }
+      }
+    }
+    return Rx.Subject.create(observer, observable);
   }
 
 }

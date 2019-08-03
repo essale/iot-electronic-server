@@ -17,14 +17,14 @@ export class AuthService {
   currentUser: User = new User();
 
   constructor(private userService: UserService,
-              private router: Router) {
+    private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedUser = this.decodeUserFromToken(token);
       this.setCurrentUser(decodedUser);
     }
   }
-  
+
   getToken(): string {
     return localStorage.getItem('token');
   }

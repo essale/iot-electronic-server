@@ -12,12 +12,12 @@ export interface Message {
 }
 
 export type WsUser = {
-    ws: WebSocket;
-    keepalive: any;
-    id: String;
-    username: String;
-    email: String;
-    role: String;
+	ws: WebSocket;
+	keepalive: any;
+	id: String;
+	username: String;
+	email: String;
+	role: String;
 };
 
 @Injectable()
@@ -29,19 +29,19 @@ export class ChatService {
 			.connect(CHAT_URL)
 			.map((response: MessageEvent): Message => {
 				let data = JSON.parse(response.data);
-				switch(data.type) { 
-					case "message": { 
-					  this.toast.open(data.message, 'primary');
-					  break; 
+				switch (data.type) {
+					case "message": {
+						this.toast.open(data.message, 'primary');
+						break;
 					}
-					case "ping": { 
-					  this.toast.open("ping", 'primary');
-					  break; 
-					} 
-					default: {  
-					  break; 
-					} 
-				  } 
+					case "ping": {
+						this.toast.open("ping", 'primary');
+						break;
+					}
+					default: {
+						break;
+					}
+				}
 				return {
 					type: data.type,
 					message: data.message

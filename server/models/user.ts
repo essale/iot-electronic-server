@@ -4,10 +4,10 @@ import Comment from './comment';
 
 const userSchema = new mongoose.Schema({
     username: String,
-    email: {type: String, unique: true, lowercase: true, trim: true},
+    email: { type: String, unique: true, lowercase: true, trim: true },
     password: String,
     role: String,
-    comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 // Before saving the user, hash the password
@@ -59,20 +59,20 @@ userSchema.statics.getRolesCount = function (callback) {
         this.aggregate({
             '$group': {
                 _id: '$role',
-                count: {$sum: 1}
+                count: { $sum: 1 }
             }
         }).exec((err, results) => {
             if (err) {
                 return reject(err);
             }
-            return resolve({results});
+            return resolve({ results });
         });
     });
 };
 
 // Delete all comments by user
 userSchema.pre('remove', function (next) {
-    Comment.remove({user: this._id}, next);
+    Comment.remove({ user: this._id }, next);
 });
 
 const User = mongoose.model('User', userSchema);

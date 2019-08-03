@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Tesseract} from 'tesseract.ts';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Tesseract } from 'tesseract.ts';
 
-import {UserService} from '../../services/user.service';
-import {ToastComponent} from '../../shared/toast/toast.component';
-import {InvoiceService} from '../../services/invoice.service';
-import {SupplierService} from '../../services/supplier.service';
-import {AuthService} from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { ToastComponent } from '../../shared/toast/toast.component';
+import { InvoiceService } from '../../services/invoice.service';
+import { SupplierService } from '../../services/supplier.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -132,7 +132,7 @@ export class InvoiceAnalyzerComponent implements OnInit {
 
         reader.onload = () => {
             console.log(reader.result);
-            const parameter = {image: reader.result, imageName: file.name, username: username, lang: 'heb'};
+            const parameter = { image: reader.result, imageName: file.name, username: username, lang: 'heb' };
             console.log(parameter);
             // this.invoiceService.uploadImage(parameter);
         };

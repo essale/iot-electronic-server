@@ -27,7 +27,7 @@ let checkToken = (req, res, next) => {
             return;
         } else {
             //check if user on the db
-            User.findOne({_id: decoded.user._id}, (err, item) => {
+            User.findOne({ _id: decoded.user._id }, (err, item) => {
                 if (err || item == null) {
                     res.send(401);
                     return;
@@ -65,7 +65,7 @@ let selfUser = (req, res, next) => {
 };
 
 let selfComment = (req, res, next) => {
-    Comment.findOne({_id: req.params.id}, (err, comment) => {
+    Comment.findOne({ _id: req.params.id }, (err, comment) => {
         if (err || comment == null) {
             return res.send(401);
         }

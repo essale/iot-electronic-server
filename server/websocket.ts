@@ -25,30 +25,30 @@ let wsUsers: Array<WsUser> = [];
 let sendClientList = () => {
     // build users list
     let users = [];
-    wsUsers.forEach(function(wsUser) {
+    wsUsers.forEach(function (wsUser) {
         users.push({
             _id: wsUser.id,
             email: wsUser.email,
             username: wsUser.username,
-            role: wsUser.role 
+            role: wsUser.role
         });
     });
 
-    wsUsers.forEach(function(client) {
+    wsUsers.forEach(function (client) {
         // send message to all admins
         if (client.role === "admin" && client.ws.readyState == WSReadyState.OPEN) {
             client.ws.send(JSON.stringify({
                 type: 'list',
-                message: users 
+                message: users
             }));
         }
     });
 }
 let keepalive = (ws) => {
-    if (ws.readyState == WSReadyState.OPEN) { 
+    if (ws.readyState == WSReadyState.OPEN) {
         ws.send(JSON.stringify({
             type: 'keepalive',
-            message: "" 
+            message: ""
         }));
     } else {
         handleLogout(ws)
@@ -56,20 +56,20 @@ let keepalive = (ws) => {
 }
 
 let ping = (ws) => {
-    if (ws.readyState == WSReadyState.OPEN) { 
+    if (ws.readyState == WSReadyState.OPEN) {
         ws.send(JSON.stringify({
             type: 'ping',
-            message: "pong" 
+            message: "pong"
         }));
     }
 }
 
 let handleLogout = (ws) => {
-    wsUsers.forEach(function(client) {
+    wsUsers.forEach(function (client) {
         // remove disconnected users
         if (client.ws.readyState != WSReadyState.OPEN || ws === client.ws) {
             clearInterval(client.keepalive);
-            wsUsers.splice( wsUsers.indexOf(client), 1 );
+            wsUsers.splice(wsUsers.indexOf(client), 1);
         }
     });
     sendClientList();
@@ -95,31 +95,31 @@ let handleLogin = (ws, token) => {
 }
 
 export default function setWebSocket(app) {
-    app.ws('/ws', function(ws, req, next) {
+    app.ws('/ws', function (ws, req, next) {
         console.log('connect ws');
-        ws.on('message', function(data) {
+        ws.on('message', function (data) {
             let msg = JSON.parse(data);
-            switch(msg.type) { 
-                case "login": { 
+            switch (msg.type) {
+                case "login": {
                     handleLogin(ws, msg.message);
-                    break; 
+                    break;
                 }
-                case "list": { 
+                case "list": {
                     sendClientList();
-                    break; 
+                    break;
                 }
-                case "ping": { 
-                    wsUsers.forEach(function(client) {
+                case "ping": {
+                    wsUsers.forEach(function (client) {
                         if (client.email === msg.message) {
                             ping(client.ws);
                         }
                     });
-                    break; 
-                } 
-                default: {  
-                    break; 
-                } 
-             } 
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
         });
         next();
     });

@@ -35,7 +35,7 @@ mongodb
 
     setRoutes(app);
     setWebSocket(app);
-    
+
     if (!module.parent) {
       app.listen(app.get('port'), () => {
         console.log('Server listening on port ' + app.get('port'));
@@ -45,6 +45,6 @@ mongodb
   })
   .catch((err) => {
     console.error(err);
-});
+  });
 
 export { app };

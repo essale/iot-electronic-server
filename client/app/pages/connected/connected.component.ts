@@ -20,7 +20,7 @@ export class ConnectedComponent implements OnInit {
   users: User[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
   constructor(
     public toast: ToastComponent,
     private chatService: ChatService,
@@ -30,25 +30,25 @@ export class ConnectedComponent implements OnInit {
     this.getConnectedList();
     this.isLoading = false;
   }
-  
-  getConnectedList(){
+
+  getConnectedList() {
     this.chatService.messages.next({
       type: 'list',
       message: ""
     });
-    this.chatService.messages.subscribe(data => {	
-      switch(data.type) { 
+    this.chatService.messages.subscribe(data => {
+      switch (data.type) {
         case "list": {
           this.users = data.message;
           this.dataSource = new MatTableDataSource<User>(this.users);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          break; 
-        } 
-        default: {  
-          break; 
-        } 
-      } 
+          break;
+        }
+        default: {
+          break;
+        }
+      }
     });
   }
 

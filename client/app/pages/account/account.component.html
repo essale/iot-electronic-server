@@ -11,8 +11,8 @@
               <span matPrefix>
                 <i class="prefix fa fa-user"></i>
               </span>
-              <input matInput #input type="text" minlength="2" maxlength="30" name="username" [(ngModel)]="user.username" [formControl]="username"
-                placeholder="Username">
+              <input matInput #input type="text" minlength="2" maxlength="30" name="username"
+                [(ngModel)]="user.username" [formControl]="username" placeholder="Username">
               <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
               <mat-error *ngIf="username.hasError('minlength')">
                 Username must contain at least 2 characters
@@ -31,7 +31,8 @@
               <span matPrefix>
                 <i class="prefix fa fa-envelope"></i>
               </span>
-              <input matInput type="email" name="email" [(ngModel)]="user.email" [formControl]="email" placeholder="Email">
+              <input matInput type="email" name="email" [(ngModel)]="user.email" [formControl]="email"
+                placeholder="Email">
               <mat-error *ngIf="email.hasError('pattern')">
                 Please enter a valid email address
               </mat-error>

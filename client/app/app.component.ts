@@ -13,9 +13,9 @@ export class AppComponent {
   constructor(
     public auth: AuthService,
     private chatService: ChatService
-    ) {
+  ) {
     chatService.messages.subscribe(data => {
-      
+
     });
   }
 }

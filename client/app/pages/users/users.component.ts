@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
   constructor(
     public auth: AuthService,
     public toast: ToastComponent,
@@ -69,15 +69,15 @@ export class UsersComponent implements OnInit {
       )
   }
   createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function(data, filter): boolean {
+    let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       let flag = true;
-      Object.keys(searchTerms).forEach(function(key) {
+      Object.keys(searchTerms).forEach(function (key) {
         if (searchTerms[key] !== '') {
           if (!data[key] || data[key].toString().indexOf(searchTerms[key]) === -1) {
             flag = false;
           }
-        } 
+        }
       })
       return flag;
     }
@@ -99,7 +99,7 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  getUsersDomainsCount(){
+  getUsersDomainsCount() {
     this.userService.getUsersDomainsCount().subscribe(
       data => {
         console.log('getUsersDomainsCount --> ' + data)
@@ -126,14 +126,14 @@ export class UsersComponent implements OnInit {
 
   toggleAdmin(user: User) {
     let newRole = ""
-    if (user.role=="user") {
+    if (user.role == "user") {
       newRole = "admin"
     } else {
       newRole = "user"
     }
     var dialogRef = this.dialog.open(ConfirmationDialogComponent, { disableClose: false });
     dialogRef.componentInstance.title = "Change role"
-    dialogRef.componentInstance.message = 'Change ' + user.username + ' role from "' + user.role + '" to "'+ newRole +'" ?'
+    dialogRef.componentInstance.message = 'Change ' + user.username + ' role from "' + user.role + '" to "' + newRole + '" ?'
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         user.role = newRole
@@ -145,7 +145,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getRolesCount(){
+  getRolesCount() {
     console.log('getting roles count');
     this.userService.getRolesCount().subscribe(
       data => {

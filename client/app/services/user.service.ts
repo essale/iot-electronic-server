@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
-import {User} from '../shared/models/user.model';
-import {DVC} from 'distinct-value-counter';
+import { User } from '../shared/models/user.model';
+import { DVC } from 'distinct-value-counter';
 
 /**
  * For HyperLogLog counting of the users' domains we use an outside lib:
@@ -63,11 +63,11 @@ export class UserService {
     }
 
     editUser(user: User): Observable<string> {
-        return this.http.put(`/api/user/${user._id}`, user, {responseType: 'text'});
+        return this.http.put(`/api/user/${user._id}`, user, { responseType: 'text' });
     }
 
     deleteUser(user: User): Observable<string> {
-        return this.http.delete(`/api/user/${user._id}`, {responseType: 'text'});
+        return this.http.delete(`/api/user/${user._id}`, { responseType: 'text' });
     }
 
     getUsersDomainsCount(): Observable<number> {

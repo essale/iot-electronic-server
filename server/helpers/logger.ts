@@ -7,7 +7,7 @@ class Logger {
         this.logger = winston.createLogger({
             transports: [
                 new winston.transports.Console(),
-                new winston.transports.File({filename: './server/logs/nodeApp.log'})
+                new winston.transports.File({ filename: './server/logs/nodeApp.log' })
             ]
         });
     }

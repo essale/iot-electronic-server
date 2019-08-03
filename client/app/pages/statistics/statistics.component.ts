@@ -13,7 +13,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   styleUrls: ['./statistics.component.scss']
 })
 
-export class StatisticsComponent implements OnInit  {
+export class StatisticsComponent implements OnInit {
   isLoading = true;
   view: any[] = [1200, 250];
 

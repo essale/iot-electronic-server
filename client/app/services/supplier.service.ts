@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
-import {Supplier} from '../shared/models/supplier.model';
-import {DVC} from 'distinct-value-counter';
-import {of} from 'rxjs';
+import { Supplier } from '../shared/models/supplier.model';
+import { DVC } from 'distinct-value-counter';
+import { of } from 'rxjs';
 
 @Injectable()
 export class SupplierService {
@@ -24,11 +24,11 @@ export class SupplierService {
     }
 
     editSupplier(supplier: Supplier): Observable<string> {
-        return this.http.put(`/api/supplier/${supplier._id}`, supplier, {responseType: 'text'});
+        return this.http.put(`/api/supplier/${supplier._id}`, supplier, { responseType: 'text' });
     }
 
     deleteSupplier(supplier: Supplier): Observable<string> {
-        return this.http.delete(`/api/supplier/${supplier._id}`, {responseType: 'text'});
+        return this.http.delete(`/api/supplier/${supplier._id}`, { responseType: 'text' });
     }
 
     getSuppliers(): Observable<Supplier[]> {
