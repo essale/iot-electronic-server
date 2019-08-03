@@ -175,6 +175,19 @@ export class SuppliersComponent implements OnInit {
     }
 
     onEdit(supplier: Supplier) {
-        // TODO: need to create edit form
+        this.supplierService.getSupplier(supplier._id).subscribe(
+            data => {
+                const dialogConfig = new MatDialogConfig();
+                dialogConfig.autoFocus = true;
+                dialogConfig.width = "60%";
+
+                dialogConfig.data = supplier;
+
+                this.dialog.afterAllClosed.subscribe(data => this.getSuppliers());
+                this.dialog.open(CreateSupplierComponent, dialogConfig);
+            },
+            error => console.log(error),
+            () => this.isLoading = false
+        );
     }
 }

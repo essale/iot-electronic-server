@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { SupplierService } from '../../services/supplier.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -16,8 +16,10 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 export class CreateSupplierComponent implements OnInit {
 
     title = 'Create New Supplier';
+    edit = false;
 
     registerForm: FormGroup;
+    _id = new FormControl('');
     supplierName = new FormControl('', [
         Validators.required,
         Validators.minLength(2),
@@ -69,12 +71,26 @@ export class CreateSupplierComponent implements OnInit {
         private formBuilder: FormBuilder,
         public toast: ToastComponent,
         private supplierService: SupplierService,
-        public dialogRef: MatDialogRef<CreateSupplierComponent>
-    ) {
-    }
+        public dialogRef: MatDialogRef<CreateSupplierComponent>,
+        @Inject(MAT_DIALOG_DATA) data) {
+
+        if (data != null) {
+            this.edit = true;
+            this._id = data._id;
+            this.supplierName.patchValue(data.supplierName);
+            this.email.patchValue(data.email);
+            this.address.patchValue(data.address);
+            this.phoneNumber.patchValue(data.phoneNumber);
+
+            this.date.patchValue(data.invoiceScheme.date);
+            this.id.patchValue(data.invoiceScheme.id);
+            this.payment.patchValue(data.invoiceScheme.payment);
+        }
+    };
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
+            _id: this._id,
             supplierName: this.supplierName,
             email: this.email,
             address: this.address,
@@ -88,12 +104,23 @@ export class CreateSupplierComponent implements OnInit {
     };
 
     register() {
-        this.supplierService.addSupplier(this.registerForm.value).subscribe(
-            res => {
-                this.toast.open('you successfully added new supplier!', 'success');
-            },
-            error => this.toast.open('failed to add new supplier', 'danger')
-        );
+        if (this.edit) {
+            this.supplierService.editSupplier(this.registerForm.value).subscribe(
+                res => {
+                    this.toast.open('you successfully editted supplier!', 'success');
+                },
+                error => this.toast.open('failed to editted supplier', 'danger')
+            );
+        }
+        else {
+            this.registerForm.removeControl('_id');
+            this.supplierService.addSupplier(this.registerForm.value).subscribe(
+                res => {
+                    this.toast.open('you successfully added new supplier!', 'success');
+                },
+                error => this.toast.open('failed to add new supplier', 'danger')
+            );
+        }
         this.onClose();
     }
 
