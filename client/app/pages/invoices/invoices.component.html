@@ -5,7 +5,7 @@
 <div [hidden]="isLoading" class="container">
   <div class="row">
     <div class="col-md-12 col-centered" id="app-table">
-      <div class="mat-elevation-z4">
+      <div class="mat-elevation-z4" style="margin-top: 50px">
         <mat-table #table [dataSource]="dataSource" matSort>
           <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -55,7 +55,14 @@
                 <input matInput [formControl]="totalPaymentFilter">
               </mat-form-field>
             </mat-header-cell>
-            <mat-cell *matCellDef="let invoice"> {{ invoice.totalPayment }} </mat-cell>
+            <mat-cell *matCellDef="let invoice">{{ invoice.totalPayment }}
+              <div *ngIf="invoice.inShekel">
+                <button class="dollar" (click)="convertToDollar(invoice)"> <i class="fas fa-dollar-sign"></i></button>
+              </div>
+              <div *ngIf="!invoice.inShekel">
+              <button class="dollar" (click)="convertToDollar(invoice)"> <i class="fas fa-shekel-sign"></i></button>
+              </div>
+            </mat-cell>
           </ng-container>
 
           <!-- InvoiceDate Column -->

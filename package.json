@@ -41,6 +41,7 @@
     "@ks89/angular-modal-gallery": "^7.2.1",
     "@swimlane/ngx-charts": "^10.1.0",
     "@types/googlemaps": "^3.30.19",
+    "@types/jquery": "^3.3.30",
     "aca": "^0.1.12",
     "angular2-jwt": "^0.2.3",
     "bcryptjs": "^2.4.3",
