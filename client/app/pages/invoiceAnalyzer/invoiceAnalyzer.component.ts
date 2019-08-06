@@ -134,7 +134,7 @@ export class InvoiceAnalyzerComponent implements OnInit {
             console.log(reader.result);
             const parameter = { image: reader.result, imageName: file.name, username: username, lang: 'heb' };
             console.log(parameter);
-            // this.invoiceService.uploadImage(parameter);
+            this.invoiceService.uploadImage(parameter);
         };
         reader.onerror = function (error) {
             console.log('Error: ', error);

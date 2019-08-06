@@ -1,20 +1,19 @@
 import * as jwt from 'jsonwebtoken';
 
 import UserCtrl from './controllers/user';
-import User from './models/user';
 import CommentCtrl from './controllers/comment';
 import Comment from './models/comment';
+import User from './models/user';
 import InvoiceCtrl from './controllers/invoice';
-import Invoice from './models/invoice';
 import SupplierCtrl from './controllers/supplier';
-import Supplier from './models/supplier';
+import StatisticsCtrl from './controllers/statistics';
 
 let checkToken = (req, res, next) => {
 
     let token = req.headers.authorization;
 
     if (!token) {
-        res.sendStatus(401);
+        res.send(401);
         return;
     }
 
@@ -110,6 +109,7 @@ export default function setRoutes(app) {
     const supplierCtrl = new SupplierCtrl();
     const commentCtrl = new CommentCtrl();
     const invoiceCtrl = new InvoiceCtrl();
+    const statisticsCtrl = new StatisticsCtrl();
 
     // Apply the routes to our application with the prefix /api
     app.use('/api', router);
@@ -137,10 +137,13 @@ export default function setRoutes(app) {
     router.route('/supplier/:id').all(checkToken).all(loginGuard).delete(supplierCtrl.delete);
 
     // Invoice
+    router.route('/invoice').all(checkToken).all(selfInvoice).get(invoiceCtrl.getAll);
     router.route('/invoice').all(checkToken).all(loginGuard).post(invoiceCtrl.insert);
-    router.route('/invoice').get(invoiceCtrl.getAll);
     router.route('/invoice/saveInvoice').all(checkToken).all(loginGuard).post(invoiceCtrl.saveInvoice);
-    router.route('/invoice/:id').all(checkToken).all(loginGuard).get(invoiceCtrl.get);
-    router.route('/invoice/:id').all(checkToken).all(loginGuard).put(invoiceCtrl.update);
-    router.route('/invoice/:id').all(checkToken).all(loginGuard).delete(invoiceCtrl.delete);
+    router.route('/invoice/:id').all(checkToken).all(selfInvoice).get(invoiceCtrl.get);
+    router.route('/invoice/:id').all(checkToken).all(selfInvoice).put(invoiceCtrl.update);
+    router.route('/invoice/:id').all(checkToken).all(selfInvoice).delete(invoiceCtrl.delete);
+
+    // Statistics
+    router.route('/statistics').all(checkToken).all(loginGuard).get(statisticsCtrl.fetchInvoicesByUser);
 }
