@@ -69,8 +69,7 @@ export class InvoiceAnalyzerComponent implements OnInit {
             username: this.authService.currentUser.username
         });
 
-        this.suppliers = this.supplierService.getSuppliers();
-        console.log(this.suppliers);
+        this.getSuppliers();
     }
 
     submit() {
@@ -143,9 +142,36 @@ export class InvoiceAnalyzerComponent implements OnInit {
         return reader.result;
     }
 
+    getSuppliers() {
+        this.supplierService.getSuppliers().subscribe(
+            data => {
+                console.log("data" + data)
+                this.suppliers = data;
+            },
+            error => console.log(error)
+        );
+    }
 
     parseHeb(tes) {
         console.log(tes.text);
+        console.log(this.suppliers);
+        // console.log(this.suppliers[supllier].supplierName);
+        // tslint:disable-next-line: forin
+        let supp_temp;
+
+        for (const supllier in this.suppliers){
+           const scheme = this.suppliers[supllier].invoiceScheme;
+            if ( tes.text.contains(scheme.id) && tes.text.contains(scheme.date)
+         && tes.text.contains(scheme.payment)) {
+             console.log("found him")
+             console.log(supp_temp)
+            supp_temp = this.suppliers[supllier];
+            break;
+        }}
+        console.log(supp_temp.invoiceScheme.id)
+            this.invoiceForm.controls['invoiceId'].setValue(supp_temp.invoiceScheme.id);
+            this.invoiceForm.controls['totalPayment'].setValue(supp_temp.invoiceScheme.payment);
+
 
         /*for (let i = 0 ; i < words.size; i++ ) {
             if (tes.text.contains('לתשלום:')) {
