@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/observable/of';
 import {AuthService} from '../../services/auth.service';
-import {ToastComponent} from '../../shared/toast/toast.component';
-import {MatDialog} from '@angular/material';
-import {Router} from '@angular/router';
-import {SupplierService} from '../../services/supplier.service';
 import {StatisticsService} from '../../services/statistics.service';
-import {AuthService} from '../../services/auth.service';
+
 
 
 @Component({
