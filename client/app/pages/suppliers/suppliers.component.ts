@@ -169,7 +169,6 @@ export class SuppliersComponent implements OnInit {
     onCreate() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
-        dialogConfig.width = "60%";
         this.dialog.afterAllClosed.subscribe(data => this.getSuppliers());
         this.dialog.open(CreateSupplierComponent, dialogConfig);
     }
@@ -179,8 +178,6 @@ export class SuppliersComponent implements OnInit {
             data => {
                 const dialogConfig = new MatDialogConfig();
                 dialogConfig.autoFocus = true;
-                dialogConfig.width = "60%";
-
                 dialogConfig.data = supplier;
 
                 this.dialog.afterAllClosed.subscribe(data => this.getSuppliers());

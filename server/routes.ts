@@ -134,9 +134,9 @@ export default function setRoutes(app) {
     // Supplier
     router.route('/supplier').all(checkToken).all(loginGuard).post(supplierCtrl.insert);
     router.route('/supplier').get(supplierCtrl.getAll);
-    router.route('/supplier/:id').all(checkToken).all(loginGuard).get(supplierCtrl.get);
-    router.route('/supplier/:id').all(checkToken).all(loginGuard).put(supplierCtrl.update);
-    router.route('/supplier/:id').all(checkToken).all(loginGuard).delete(supplierCtrl.delete);
+    router.route('/supplier/:id').all(checkToken).all(adminGuard).get(supplierCtrl.get);
+    router.route('/supplier/:id').all(checkToken).all(adminGuard).put(supplierCtrl.update);
+    router.route('/supplier/:id').all(checkToken).all(adminGuard).delete(supplierCtrl.delete);
 
     // Invoice
     router.route('/invoice').all(checkToken).all(selfInvoice).get(invoiceCtrl.getAll);

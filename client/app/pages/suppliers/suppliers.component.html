@@ -104,10 +104,10 @@
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
                         <mat-cell *matCellDef="let supplier">
-                            <button mat-icon-button color="" class="btn btn-sm" (click)="onEdit(supplier)">
+                            <button *ngIf="auth.isAdmin" mat-icon-button color="" class="btn btn-sm" (click)="onEdit(supplier)">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button mat-icon-button color="warn" class="btn btn-sm btn-danger"
+                            <button *ngIf="auth.isAdmin" mat-icon-button color="warn" class="btn btn-sm btn-danger"
                                 (click)="onDelete(supplier)">
                                 <i class="fa fa-trash"></i>
                             </button>
