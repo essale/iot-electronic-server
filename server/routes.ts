@@ -7,6 +7,8 @@ import User from './models/user';
 import InvoiceCtrl from './controllers/invoice';
 import SupplierCtrl from './controllers/supplier';
 import StatisticsCtrl from './controllers/statistics';
+import Invoice from './models/invoice';
+import Supplier from './models/supplier';
 
 let checkToken = (req, res, next) => {
 
@@ -114,14 +116,14 @@ export default function setRoutes(app) {
     // Apply the routes to our application with the prefix /api
     app.use('/api', router);
 
-    // Users
-    router.route('/login').post(userCtrl.login);
-    router.route('/user').post(userCtrl.insert);
-    router.route('/users').all(checkToken).all(adminGuard).get(userCtrl.getAll);
-    router.route('/users/roles_count').all(checkToken).all(adminGuard).get(userCtrl.rolesCount);
-    router.route('/user/:id').all(checkToken).all(selfUser).get(userCtrl.get);
-    router.route('/user/:id').all(checkToken).all(selfUser).put(userCtrl.update);
-    router.route('/user/:id').all(checkToken).all(adminGuard).delete(userCtrl.delete);
+  // Users
+  router.route('/login').post(userCtrl.login);
+  router.route('/user').post(userCtrl.insert);
+  router.route('/users').all(checkToken).all(adminGuard).get(userCtrl.getAll);
+  router.route('/users/roles_count').all(checkToken).all(adminGuard).get(userCtrl.rolesCount);
+  router.route('/user/:id').all(checkToken).all(selfUser).get(userCtrl.get);
+  router.route('/user/:id').all(checkToken).all(selfUser).put(userCtrl.update);
+  router.route('/user/:id').all(checkToken).all(adminGuard).delete(userCtrl.delete);
 
     // Comment
     router.route('/comment').all(checkToken).all(loginGuard).post(commentCtrl.insert);
