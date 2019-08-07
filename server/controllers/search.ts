@@ -1,14 +1,17 @@
-import * as mongoose from 'mongoose';
 import Invoice from '../models/invoice';
 import Supplier from '../models/supplier';
 import User from '../models/user';
+import {modelTypeEnum} from '../commons/consts/enums';
+
 
 abstract class SearchCtrl {
     model: any;
+    retVal: any;
 
     // Get all
-    groupBy = function (modelType, userName, groupParameter) {
-        let retVal = null;
+    groupBy = async (modelType, userName, groupParameter) => {
+        console.log(userName);
+        console.log(groupParameter);
 
         switch (modelType) {
             case modelTypeEnum.INVOICE: {
@@ -25,26 +28,26 @@ abstract class SearchCtrl {
             }
         }
 
-        this.model.aggregate(
-            { $match: {$username: userName } },
+        const docs = await this.model.aggregate(
+            // { $match: { username: userName } },
             {
                 $group: {
                     _id: groupParameter, // grouping key - group by field district
-                    flatsCount: { $sum: 1 }
+                    flatsCount: {$sum: 1}
                 }
-            },
-            function( err, data ) {
-
-                if ( err ) {
-                    throw err;
-                }
-
-                console.log( JSON.stringify( data, undefined, 2 ) );
-                retVal = data;
             }
         );
 
-        return retVal;
+        this.setRetVal(docs);
+
+        return this.retVal;
+    }
+
+    setRetVal = function (data) {
+        console.log("GGGG");
+        console.log(data);
+
+        this.retVal = data;
     };
 }
 

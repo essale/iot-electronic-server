@@ -11,7 +11,8 @@ export class StatisticsService {
     }
 
     getInvocesByUsername(name: String): Observable<Invoice> {
-        return this.http.get<Invoice>(`/api/statistics/${name}`);
+        const url = `/api/statistics/${name}`;
+        return this.http.get<Invoice>(url);
     }
 }
 

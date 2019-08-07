@@ -111,9 +111,10 @@ export class InvoicesComponent implements OnInit {
                 this.dataSource.sort = this.sort;
                 this.dataSource.filterPredicate = this.createFilter();
             },
-            error => console.log(error),
-            () => this.isLoading = false
+            error => console.log(error)
         );
+
+        this.isLoading = false;
     }
 
     deleteInvoice(invoice: Invoice) {

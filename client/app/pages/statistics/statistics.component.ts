@@ -12,7 +12,7 @@ import {StatisticsService} from '../../services/statistics.service';
 })
 
 export class StatisticsComponent implements OnInit {
-    isLoading = true;
+    isLoading = false;
     view: any[] = [1200, 250];
 
     // options
@@ -42,6 +42,7 @@ export class StatisticsComponent implements OnInit {
     }
 
     upload() {
-        console.log(this.statService.getInvocesByUsername(this.authService.currentUser.username));
+        console.log(this.authService.currentUser.username);
+        let invocesByUsername = this.statService.getInvocesByUsername(this.authService.currentUser.username).subscribe(data => console.log(data));
     }
 }

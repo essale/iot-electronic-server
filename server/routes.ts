@@ -139,13 +139,13 @@ export default function setRoutes(app) {
     router.route('/supplier/:id').all(checkToken).all(adminGuard).delete(supplierCtrl.delete);
 
     // Invoice
-    router.route('/invoice').all(checkToken).all(selfInvoice).get(invoiceCtrl.getAll);
+    router.route('/invoice').all(checkToken).all(loginGuard).get(invoiceCtrl.getAll);
     router.route('/invoice').all(checkToken).all(loginGuard).post(invoiceCtrl.insert);
     router.route('/invoice/saveInvoice').all(checkToken).all(loginGuard).post(invoiceCtrl.saveInvoice);
-    router.route('/invoice/:id').all(checkToken).all(selfInvoice).get(invoiceCtrl.get);
-    router.route('/invoice/:id').all(checkToken).all(selfInvoice).put(invoiceCtrl.update);
-    router.route('/invoice/:id').all(checkToken).all(selfInvoice).delete(invoiceCtrl.delete);
+    router.route('/invoice/:id').all(checkToken).all(loginGuard).get(invoiceCtrl.get);
+    router.route('/invoice/:id').all(checkToken).all(loginGuard).put(invoiceCtrl.update);
+    router.route('/invoice/:id').all(checkToken).all(loginGuard).delete(invoiceCtrl.delete);
 
     // Statistics
-    router.route('/statistics').all(checkToken).all(loginGuard).get(statisticsCtrl.fetchInvoicesByUser);
+    router.route('/statistics/:name').all(checkToken).all(loginGuard).get(statisticsCtrl.fetchInvoicesByUser);
 }
