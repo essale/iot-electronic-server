@@ -8,6 +8,7 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { InvoiceService } from '../../services/invoice.service';
 import { SupplierService } from '../../services/supplier.service';
 import { AuthService } from '../../services/auth.service';
+import { scheduleMicroTask } from '@angular/core/src/util';
 
 
 @Component({
@@ -158,34 +159,37 @@ export class InvoiceAnalyzerComponent implements OnInit {
         // console.log(this.suppliers[supllier].supplierName);
         // tslint:disable-next-line: forin
         let supp_temp;
+        let text_len = tes.text.length;
+        let flag = 0;
 
         for (const supllier in this.suppliers){
            const scheme = this.suppliers[supllier].invoiceScheme;
-            if ( tes.text.contains(scheme.id) && tes.text.contains(scheme.date)
-         && tes.text.contains(scheme.payment)) {
+            if ( tes.text.includes(scheme.id) && tes.text.includes(scheme.date)
+         && tes.text.includes(scheme.payment)) {
              console.log("found him")
              console.log(supp_temp)
-            supp_temp = this.suppliers[supllier];
+           // supp_temp = this.suppliers[supllier];
+           // flag =1;
             break;
         }}
-        console.log(supp_temp.invoiceScheme.id)
-            this.invoiceForm.controls['invoiceId'].setValue(supp_temp.invoiceScheme.id);
-            this.invoiceForm.controls['totalPayment'].setValue(supp_temp.invoiceScheme.payment);
+        
+        let new_array = tes.text.split(' ')
+        let id_ar =new_array[2];
+        let ar_payment = new_array[5];
+        let ar_supname = new_array[7] + " " +  new_array[8];
+       
+        console.log(new_array);
+ 
 
+        id_ar = id_ar.slice(0, id_ar.length - 6);
+        ar_payment = ar_payment.slice(0, ar_payment.length - 2);
+        
+             this.invoiceForm.controls['invoiceId'].setValue(id_ar);
+             this.invoiceForm.controls['totalPayment'].setValue(ar_payment);
+             this.invoiceForm.controls['supplierName'].setValue(ar_supname);
 
-        /*for (let i = 0 ; i < words.size; i++ ) {
-            if (tes.text.contains('לתשלום:')) {
-                break;
-            }
-        }*/
-
-        // Invoice id regex (i.g. 11111)
-        /*for (let i = 0 ; i < words.size; i++ ) {
-            if (words[i].match(/^([0-9]){5}$/i)) {
-                break;
-            }
-        }*/
-
+           // this.invoiceForm.controls['invoiceId'].setValue(supp_temp.invoiceScheme.id);
+           // this.invoiceForm.controls['totalPayment'].setValue(supp_temp.invoiceScheme.payment);
 
         // Date regex (i.g. 31.12.2019)
         for (let i = 0; i < tes.words.length; i++) {
