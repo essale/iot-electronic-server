@@ -30,23 +30,23 @@ export class InvoiceAnalyzerComponent implements OnInit {
 
     invoiceId = new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(2),
         Validators.maxLength(100)
     ]);
 
     supplierName = new FormControl('', [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(2)
     ]);
 
     totalPayment = new FormControl('', [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(2)
     ]);
 
     invoiceDate = new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(2),
         Validators.maxLength(20)
     ]);
 

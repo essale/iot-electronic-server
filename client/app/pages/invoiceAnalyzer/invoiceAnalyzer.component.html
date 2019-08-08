@@ -14,10 +14,10 @@
                                 <span matPrefix>
                                     <i class="prefix fa fa-user"></i>
                                 </span>
-                                <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceId"
+                                <input matInput #input type="text" minlength="2" maxlength="30" name="invoiceId"
                                     [formControl]="invoiceId" placeholder="Invoice ID">
                                 <mat-error *ngIf="invoiceId.hasError('minlength')">
-                                    Invoice ID must contain at least 5 characters
+                                    Invoice ID must contain at least 2 characters
                                 </mat-error>
                                 <mat-error *ngIf="invoiceId.hasError('required')">
                                     Invoice ID Name is
@@ -30,10 +30,10 @@
                                 <span matPrefix>
                                     <i class="prefix fa fa-user"></i>
                                 </span>
-                                <input matInput #input type="text" minlength="5" maxlength="30" name="invoiceId"
+                                <input matInput #input type="text" minlength="2" maxlength="30" name="invoiceId"
                                     [formControl]="supplierName" placeholder="Supplier Name">
                                 <mat-error *ngIf="invoiceId.hasError('minlength')">
-                                    Supplier Name must contain at least 5 characters
+                                    Supplier Name must contain at least 2 characters
                                 </mat-error>
                                 <mat-error *ngIf="invoiceId.hasError('required')">
                                     Supplier Name is
@@ -46,7 +46,7 @@
                                 <span matPrefix>
                                     <i class="prefix fa fa-user"></i>
                                 </span>
-                                <input matInput type="text" name="totalPayment" [formControl]="totalPayment"
+                                <input matInput type="text" minlength="2" maxlength="30" name="totalPayment" [formControl]="totalPayment"
                                     placeholder="Total Payment">
                                 <mat-error *ngIf="totalPayment.hasError('required')">
                                     Total Payment Name is
@@ -59,7 +59,7 @@
                                 <span matPrefix>
                                     <i class="prefix fa fa-user"></i>
                                 </span>
-                                <input matInput type="text" minlength="5" maxlength="30" name="invoiceDate"
+                                <input matInput type="text" minlength="2" maxlength="30" name="invoiceDate"
                                     [formControl]="invoiceDate" placeholder="Invoice Date">
                                 <mat-error *ngIf="invoiceDate.hasError('required')">
                                     Invoice Date is
