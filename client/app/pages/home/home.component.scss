@@ -5,6 +5,11 @@
         margin: 10px;
     }
 }
+html {
+    height: 100%;
+    margin: auto;
+    width: 960px;
+  }
 
 agm-map {
     height: 500px;
@@ -20,9 +25,12 @@ agm-map {
 }
 
 p{
-    font-size:20px
+    font-size:20px;
+    color: white;
 }
 
 h1{
     font-size: 30px;
+    color: crimson;
 }
+

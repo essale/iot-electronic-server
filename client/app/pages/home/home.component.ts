@@ -33,11 +33,11 @@ export class HomeComponent {
 
   // User Selected Location (initialize to center of Israel)
   public location: Location = {
-    lat: 31.0461,
-    lng: 34.8516,
+    lat: 32.314528,
+    lng: 34.862023,
     marker: {
-      lat: 31.0461,
-      lng: 34.8516,
+      lat: 32.314528,
+      lng: 34.862023,
       draggable: true
     },
     zoom: 7,
@@ -75,7 +75,7 @@ export class HomeComponent {
           this.location.marker.draggable = true;
           this.location.viewport = results[0].geometry.viewport;
 
-          this.markers = []
+          this.markers = [];
 
           this.markers.push({
             lat: results[0].geometry.location.lat(),
