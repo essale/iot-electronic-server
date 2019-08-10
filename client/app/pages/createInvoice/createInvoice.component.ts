@@ -5,7 +5,6 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { InvoiceService } from '../../services/invoice.service';
 import { AuthService } from '../../services/auth.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { logger } from 'server/helpers/logger';
 
 
 @Component({
