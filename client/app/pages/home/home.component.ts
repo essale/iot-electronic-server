@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MapsAPILoader, AgmMap, GoogleMapsAPIWrapper } from '@agm/core';
+import { SupplierService } from '../../../app/services/supplier.service'
 
 declare var google: any;
 
@@ -53,14 +54,27 @@ export class HomeComponent {
   constructor(
     public auth: AuthService,
     public mapsApiLoader: MapsAPILoader,
+    private supplierService: SupplierService,
   ) {
     this.mapsApiLoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder();
     });
   }
 
-  findLocation(address) {
+  mapReady($event: any) {
     this.markers = []
+    this.supplierService.getSuppliers().subscribe(
+      suppliers => {
+        suppliers.forEach(element => {
+          this.findLocation(element.address, element.supplierName);
+      })
+      },
+      error => console.log(error)
+    );
+  }
+
+  findLocation(address, label = new String()) {
+    console.info("placing marker on: " + address);
     if (!this.geocoder) this.geocoder = new google.maps.Geocoder()
     this.geocoder.geocode({
       'address': address
@@ -75,12 +89,11 @@ export class HomeComponent {
           this.location.marker.draggable = true;
           this.location.viewport = results[0].geometry.viewport;
 
-          this.markers = [];
-
           this.markers.push({
             lat: results[0].geometry.location.lat(),
             lng: results[0].geometry.location.lng(),
-            draggable: true
+            draggable: false,
+            label: label.toString()
           });
           this.map.triggerResize(false);
         }
