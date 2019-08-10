@@ -46,11 +46,8 @@ export class CreateSupplierComponent implements OnInit {
     ]);
 
 
-    date = new FormControl('', [
+    date = new FormControl(new Date(), [
         Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(30),
-        Validators.pattern('[א-תa-z:A-Z0-9_-\\s]*')
     ]);
 
     id = new FormControl('', [
@@ -82,7 +79,7 @@ export class CreateSupplierComponent implements OnInit {
             this.address.patchValue(data.address);
             this.phoneNumber.patchValue(data.phoneNumber);
 
-            this.date.patchValue(data.invoiceScheme.date);
+            this.date.patchValue(new Date(data.invoiceScheme.date));
             this.id.patchValue(data.invoiceScheme.id);
             this.payment.patchValue(data.invoiceScheme.payment);
         }

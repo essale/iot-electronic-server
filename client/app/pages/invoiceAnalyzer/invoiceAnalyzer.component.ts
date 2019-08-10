@@ -31,23 +31,26 @@ export class InvoiceAnalyzerComponent implements OnInit {
     invoiceId = new FormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(100)
+        Validators.maxLength(30),
+        Validators.pattern('[0-9_-\\s]*')
     ]);
 
     supplierName = new FormControl('', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern('[א-תa-z:A-Z0-9_-\\s]*')
     ]);
 
     totalPayment = new FormControl('', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern('[0-9_-\\s]*')
     ]);
 
-    invoiceDate = new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20)
+    invoiceDate = new FormControl(new Date(), [
+        Validators.required
     ]);
 
     constructor(
@@ -200,7 +203,11 @@ export class InvoiceAnalyzerComponent implements OnInit {
                 /*console.log(tes.words[i-3].text)
                 console.log(tes.words[i-2].text)
                 console.log(tes.words[i-1].text)*/
-                this.invoiceForm.controls['invoiceDate'].setValue(tes.words[i].text);
+                let date = new Date();
+                date.setDate(parseInt(tes.words[i].split('/')[0]));
+                date.setMonth(parseInt(tes.words[i].split('/')[1]));
+                date.setFullYear(parseInt(tes.words[i].split('/')[2]));
+                this.invoiceForm.controls['invoiceDate'].setValue(date.toISOString());
                 break;
             }
         }

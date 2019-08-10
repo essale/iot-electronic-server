@@ -16,6 +16,7 @@ import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { InvoiceAnalyzerComponent, InvoicesComponent } from './pages';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 import { CreateSupplierComponent } from './pages/createSupplier/createSupplier.component';
+import { CreateInvoiceComponent } from './pages/createInvoice/createInvoice.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardLogin] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin] },
   { path: 'createSupplier', component: CreateSupplierComponent, canActivate: [AuthGuardLogin] },
+  { path: 'createInvoice', component: CreateInvoiceComponent, canActivate: [AuthGuardLogin] },
   { path: 'connected', component: ConnectedComponent, canActivate: [AuthGuardAdmin] },
   { path: 'notfound', component: NotFoundComponent },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuardLogin] },

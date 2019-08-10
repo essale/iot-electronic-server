@@ -12,6 +12,7 @@ import {
     CreateSupplierComponent,
     HomeComponent,
     InvoiceAnalyzerComponent,
+    CreateInvoiceComponent,
     InvoicesComponent,
     LoginComponent,
     LogoutComponent,
@@ -54,6 +55,7 @@ const PAGES = [
     UsersComponent,
     SuppliersComponent,
     CreateSupplierComponent,
+    CreateInvoiceComponent,
     ConnectedComponent,
     NotFoundComponent,
     StatisticsComponent,
@@ -102,7 +104,7 @@ const PAGES = [
         GoogleMapsAPIWrapper],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     bootstrap: [AppComponent],
-    entryComponents: [CreateSupplierComponent]
+    entryComponents: [CreateSupplierComponent, CreateInvoiceComponent]
 })
 
 export class AppModule {

@@ -73,7 +73,7 @@
                                 <input matInput [formControl]="invoiceSchemeDateFilter">
                             </mat-form-field>
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let supplier"> {{supplier.invoiceScheme.date}} </mat-cell>
+                        <mat-cell *matCellDef="let supplier"> {{supplier.invoiceScheme.date | date}} </mat-cell>
                     </ng-container>
 
                     <!-- invoiceSchemeId Column -->

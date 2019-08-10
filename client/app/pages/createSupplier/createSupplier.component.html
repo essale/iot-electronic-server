@@ -70,17 +70,12 @@
             <div formGroupName="invoiceScheme">
                 <mat-form-field>
                     <span matPrefix>
-                        <i class="prefix fa fa-calendar"></i>
+                        <i class="prefix fas fa-calendar-alt"></i>
                     </span>
-                    <input matInput #dateinput type="text" minlength="2" maxlength="30" name="date"
-                        formControlName="date" placeholder="Date pattern">
-                    <mat-hint align="end">{{dateinput.value?.length || 0}}/30</mat-hint>
-                    <mat-error *ngIf="date.hasError('minlength')">
-                        Date pattern must contain at least 2 characters
-                    </mat-error>
-                    <mat-error *ngIf="date.hasError('pattern')">
-                        Date pattern can contain only letters and numbers
-                    </mat-error>
+                    <input matInput [matDatepicker]="date" name="date" placeholder="Date pattern"
+                        formControlName="date">
+                    <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                    <mat-datepicker #date></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field>

@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Invoice } from '../../shared/models/invoice.model';
 import { ConfirmationDialogComponent } from '../../shared/confirm/confirmation-dialog';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource, MatDialogConfig } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { InvoiceService } from '../../services/invoice.service';
 import { AuthService } from '../../services/auth.service';
+import { CreateInvoiceComponent } from '..';
 
 @Component({
     selector: 'app-invoices',
@@ -39,7 +40,7 @@ export class InvoicesComponent implements OnInit {
 
     constructor(
         public toast: ToastComponent,
-        private authService: AuthService,
+        private auth: AuthService,
         private invoiceService: InvoiceService,
         public dialog: MatDialog
     ) {
@@ -140,7 +141,7 @@ export class InvoicesComponent implements OnInit {
             // @ts-ignore
             if (priceInput !== 0 && !isNaN(invoice.totalPayment)) {
                 let usd_ils_rate = response.rates['ILS']
-                if(!invoice.inShekel) {
+                if (!invoice.inShekel) {
                     // @ts-ignore
                     let amountInUsd = (parseFloat(priceInput) / parseFloat(usd_ils_rate)).toFixed(2)
                     invoice.totalPayment = new Number(amountInUsd);
@@ -154,7 +155,21 @@ export class InvoicesComponent implements OnInit {
                 }
             }
         });
+    }
 
+    onEdit(invoice: Invoice) {
+        this.invoiceService.getInvoice(invoice._id).subscribe(
+            data => {
+                const dialogConfig = new MatDialogConfig();
+                dialogConfig.autoFocus = true;
+                dialogConfig.data = invoice;
+
+                this.dialog.afterAllClosed.subscribe(data => this.getInvoices());
+                this.dialog.open(CreateInvoiceComponent, dialogConfig);
+            },
+            error => console.log(error),
+            () => this.isLoading = false
+        );
     }
 }
 
