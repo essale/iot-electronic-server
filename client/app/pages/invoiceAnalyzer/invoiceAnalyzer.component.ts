@@ -200,13 +200,16 @@ export class InvoiceAnalyzerComponent implements OnInit {
 
             const isMatch = word.match(/^([0-2][0-9]|(3)[0-1])(\/|.|-)(((0)[0-9])|((1)[0-2]))(\/|.|-)(\d{4}$|\d{2}$)/i);
             if (isMatch) {
-                /*console.log(tes.words[i-3].text)
-                console.log(tes.words[i-2].text)
-                console.log(tes.words[i-1].text)*/
                 let date = new Date();
-                date.setDate(parseInt(tes.words[i].split('/')[0]));
-                date.setMonth(parseInt(tes.words[i].split('/')[1]));
-                date.setFullYear(parseInt(tes.words[i].split('/')[2]));
+                if (word.split('/')[2].length === 4) {
+                    // in case of full year, e.g. 1999
+                    let dateString = word.split('/')[2] + "-" + word.split('/')[1] + "-" + word.split('/')[0];
+                    date = new Date(dateString);  // e.g. '2018-08-23'
+                } else {
+                    // in case of short year, e.g. 19 -> 2019
+                    let dateString = "20" + word.split('/')[2] + "-" + word.split('/')[1] + "-" + word.split('/')[0];
+                    date = new Date(dateString);  // e.g. '2018-08-23'
+                }
                 this.invoiceForm.controls['invoiceDate'].setValue(date.toISOString());
                 break;
             }
