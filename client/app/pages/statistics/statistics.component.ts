@@ -4,7 +4,6 @@ import {AuthService} from '../../services/auth.service';
 import {StatisticsService} from '../../services/statistics.service';
 
 
-
 @Component({
     selector: 'app-statistics',
     templateUrl: './statistics.component.html',
@@ -15,15 +14,20 @@ export class StatisticsComponent implements OnInit {
     isLoading = false;
     view: any[] = [1200, 250];
 
+    title: any;
+    showLabels: any;
+    explodeSlices: any;
+    doughnut: any;
+
     // options
     showXAxis = true;
     showYAxis = true;
     gradient = false;
     showLegend = true;
     showXAxisLabel = true;
-    xAxisLabel = 'bla';
+    xAxisLabel = '';
     showYAxisLabel = true;
-    yAxisLabel = 'bal2';
+    yAxisLabel = 'Total Payment';
     timeline = true;
 
     colorScheme = {
@@ -35,14 +39,69 @@ export class StatisticsComponent implements OnInit {
 
     constructor(
         private statService: StatisticsService,
-        private authService: AuthService
+        private authService: AuthService,
+        public auth: AuthService,
+        // public toast: ToastComponent,
+        // public dialog: MatDialog,
+        // public router: Router,
     ) {}
 
     ngOnInit() {
+        this.getTotalInvoices();
+        this.getInvoicesPayment();
     }
 
-    upload() {
-        console.log(this.authService.currentUser.username);
-        let invocesByUsername = this.statService.getInvocesByUsername(this.authService.currentUser.username).subscribe(data => console.log(data));
+    dynamicColors() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
     }
+
+    getTotalInvoices() {
+        console.log(this.authService.currentUser.username);
+        let invoicesByUsername = this.statService.getInvocesByUsername(this.authService.currentUser.username)
+            .subscribe(data => {
+                console.log('data: ', data)
+                var arr = []
+                for(var index in data) {
+                    arr.push(
+                        {
+                            "name": data[index]._id,
+                            "value": data[index].totalInvoices
+                        }
+                    )
+                    this.colorScheme.domain.push(this.dynamicColors())
+                }
+                this.singlePie = arr;
+            },
+                error => {
+                    () => this.isLoading = false;
+                }
+            );
+    }
+
+    getInvoicesPayment() {
+        console.log(this.authService.currentUser.username);
+        let invoicesByUsername = this.statService.getInvocesByUsername(this.authService.currentUser.username)
+            .subscribe(data => {
+                    console.log('data: ', data)
+                    var arr = []
+                    for(var index in data) {
+                        arr.push(
+                            {
+                                "name": data[index]._id,
+                                "value": data[index].totalPayment
+                            }
+                        )
+                        this.colorScheme.domain.push(this.dynamicColors())
+                    }
+                    this.singleBar = arr;
+                },
+                error => {
+                    () => this.isLoading = false;
+                }
+            );
+    }
+
 }
