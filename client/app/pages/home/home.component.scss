@@ -9,9 +9,8 @@ html {
     height: 100%;
     margin: auto;
     width: 960px;
-    height: 100%;
-    margin: auto;
     overflow: scroll;
+  
   }
 
 agm-map {
@@ -36,4 +35,19 @@ h1{
     font-size: 30px;
     color: crimson;
 }
+
+#ex3 {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  #features{
+      margin-top: 50px;
+  }
+
+  #mamap{
+      display: block;
+  }
 
