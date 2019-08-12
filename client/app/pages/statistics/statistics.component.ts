@@ -40,10 +40,7 @@ export class StatisticsComponent implements OnInit {
     constructor(
         private statService: StatisticsService,
         private authService: AuthService,
-        public auth: AuthService,
-        // public toast: ToastComponent,
-        // public dialog: MatDialog,
-        // public router: Router,
+        public auth: AuthService
     ) {}
 
     ngOnInit() {
