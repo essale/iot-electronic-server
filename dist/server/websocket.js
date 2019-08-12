@@ -42,6 +42,14 @@ var ping = function (ws) {
         }));
     }
 };
+var message = function (ws) {
+    if (ws.readyState == 1 /* OPEN */) {
+        ws.send(JSON.stringify({
+            type: 'message',
+            message: "Thank you for choosing DOCML!"
+        }));
+    }
+};
 var handleLogout = function (ws) {
     wsUsers.forEach(function (client) {
         // remove disconnected users
@@ -78,6 +86,14 @@ function setWebSocket(app) {
             switch (msg.type) {
                 case "login": {
                     handleLogin(ws, msg.message);
+                    break;
+                }
+                case 'message1': {
+                    wsUsers.forEach(function (client) {
+                        if (client.email === msg.message) {
+                            message(client.ws);
+                        }
+                    });
                     break;
                 }
                 case "list": {

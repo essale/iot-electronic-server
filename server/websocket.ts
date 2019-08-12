@@ -64,6 +64,15 @@ let ping = (ws) => {
     }
 }
 
+let message = (ws) => {
+    if (ws.readyState == WSReadyState.OPEN) {
+        ws.send(JSON.stringify({
+            type: 'message',
+            message: "Thank you for choosing DOCML!"
+        }));
+    }
+}
+
 let handleLogout = (ws) => {
     wsUsers.forEach(function (client) {
         // remove disconnected users
@@ -102,6 +111,14 @@ export default function setWebSocket(app) {
             switch (msg.type) {
                 case "login": {
                     handleLogin(ws, msg.message);
+                    break;
+                }
+                case 'message1': {
+                    wsUsers.forEach(function (client) {
+                        if (client.email === msg.message) {
+                            message(client.ws);
+                        }
+                    });
                     break;
                 }
                 case "list": {
