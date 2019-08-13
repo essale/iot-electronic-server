@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Tesseract } from 'tesseract.ts';
 
-import { UserService } from '../../services/user.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { InvoiceService } from '../../services/invoice.service';
 import { SupplierService } from '../../services/supplier.service';
 import { AuthService } from '../../services/auth.service';
-import { scheduleMicroTask } from '@angular/core/src/util';
 
 
 @Component({
@@ -55,9 +52,7 @@ export class InvoiceAnalyzerComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router,
         public toast: ToastComponent,
-        private userService: UserService,
         private invoiceService: InvoiceService,
         private supplierService: SupplierService,
         private authService: AuthService
@@ -134,9 +129,9 @@ export class InvoiceAnalyzerComponent implements OnInit {
             .catch(console.error);
 
         reader.onload = () => {
-            console.log(reader.result);
+            // console.log(reader.result);
             const parameter = { image: reader.result, imageName: file.name, username: username, lang: 'heb' };
-            console.log(parameter);
+            // console.log(parameter);
             this.invoiceService.uploadImage(parameter);
         };
         reader.onerror = function (error) {
@@ -159,40 +154,32 @@ export class InvoiceAnalyzerComponent implements OnInit {
     parseHeb(tes) {
         console.log(tes.text);
         console.log(this.suppliers);
-        // console.log(this.suppliers[supllier].supplierName);
-        // tslint:disable-next-line: forin
-        let supp_temp;
-        let text_len = tes.text.length;
-        let flag = 0;
 
-        for (const supllier in this.suppliers){
-           const scheme = this.suppliers[supllier].invoiceScheme;
-            if ( tes.text.includes(scheme.id) && tes.text.includes(scheme.date)
-         && tes.text.includes(scheme.payment)) {
-             console.log("found him")
-             console.log(supp_temp)
-           // supp_temp = this.suppliers[supllier];
-           // flag =1;
-            break;
-        }}
-        
+        let supp_temp;
+
+        for (const supllier in this.suppliers) {
+            const scheme = this.suppliers[supllier].invoiceScheme;
+            if (tes.text.includes(scheme.id) && tes.text.includes(scheme.date)
+                && tes.text.includes(scheme.payment)) {
+                console.log("found him")
+                console.log(supp_temp)
+                break;
+            }
+        }
+
         let new_array = tes.text.split(' ')
-        let id_ar =new_array[2];
+        let id_ar = new_array[2];
         let ar_payment = new_array[5];
-        let ar_supname = new_array[7] + " " +  new_array[8];
-       
+        let ar_supname = new_array[7] + " " + new_array[8];
+
         console.log(new_array);
- 
 
         id_ar = id_ar.slice(0, id_ar.length - 6);
         ar_payment = ar_payment.slice(0, ar_payment.length - 2);
-        
-             this.invoiceForm.controls['invoiceId'].setValue(id_ar);
-             this.invoiceForm.controls['totalPayment'].setValue(ar_payment);
-             this.invoiceForm.controls['supplierName'].setValue(ar_supname);
 
-           // this.invoiceForm.controls['invoiceId'].setValue(supp_temp.invoiceScheme.id);
-           // this.invoiceForm.controls['totalPayment'].setValue(supp_temp.invoiceScheme.payment);
+        this.invoiceForm.controls['invoiceId'].setValue(id_ar);
+        this.invoiceForm.controls['totalPayment'].setValue(ar_payment);
+        this.invoiceForm.controls['supplierName'].setValue(ar_supname);
 
         // Date regex (i.g. 31.12.2019)
         for (let i = 0; i < tes.words.length; i++) {
