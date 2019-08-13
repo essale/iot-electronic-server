@@ -39,7 +39,7 @@
 
             <mat-form-field>
                 <span matPrefix>
-                    <i class="prefix fa fa-user"></i>
+                    <i class="prefix fas fa-map-marker-alt"></i>
                 </span>
                 <input matInput #addressinput type="text" minlength="2" maxlength="30" name="address"
                     [formControl]="address" placeholder="Address">
@@ -54,16 +54,16 @@
 
             <mat-form-field>
                 <span matPrefix>
-                    <i class="prefix fa fa-user"></i>
+                    <i class="prefix fas fa-phone"></i>
                 </span>
-                <input matInput #phoneinput type="number" minlength="2" maxlength="30" name="phoneNumber"
+                <input matInput #phoneinput type="tel" minlength="2" maxlength="30" name="phoneNumber"
                     [formControl]="phoneNumber" placeholder="Phone Number">
                 <mat-hint align="end">{{phoneinput.value?.length || 0}}/30</mat-hint>
                 <mat-error *ngIf="phoneNumber.hasError('minlength')">
                     Phone number must contain at least 2 characters
                 </mat-error>
                 <mat-error *ngIf="phoneNumber.hasError('pattern')">
-                    Phone number can contain only letters and numbers
+                    Phone number can contain only numbers
                 </mat-error>
             </mat-form-field>
 

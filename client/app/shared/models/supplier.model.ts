@@ -2,8 +2,7 @@ export class Supplier {
     _id: string;
     supplierName: String;
     address: String;
-    phoneNumber: Number;
-    faxNumber: Number;
+    phoneNumber: String;
     email: String;
     createdAt: Date;
     invoiceScheme: {
