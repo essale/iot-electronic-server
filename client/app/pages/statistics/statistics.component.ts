@@ -56,10 +56,8 @@ export class StatisticsComponent implements OnInit {
     }
 
     getTotalInvoices() {
-        console.log(this.authService.currentUser.username);
         let invoicesByUsername = this.statService.getInvocesByUsername(this.authService.currentUser.username)
             .subscribe(data => {
-                console.log('data: ', data)
                 var arr = []
                 for(var index in data) {
                     arr.push(
@@ -79,10 +77,8 @@ export class StatisticsComponent implements OnInit {
     }
 
     getInvoicesPayment() {
-        console.log(this.authService.currentUser.username);
         let invoicesByUsername = this.statService.getInvocesByUsername(this.authService.currentUser.username)
             .subscribe(data => {
-                    console.log('data: ', data)
                     var arr = []
                     for(var index in data) {
                         arr.push(

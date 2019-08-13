@@ -3,6 +3,7 @@
 <!-- asset -->
 <div [hidden]="isLoading" class="container">
   <div class="row">
+    <div class="graph-title">How many invoices each supplier have?</div>
     <ngx-charts-pie-chart
       [view]="view"
       [scheme]="colorScheme"
@@ -17,6 +18,7 @@
   
   <br/><br/><br/>
   <div class="row">
+    <div class="graph-title">How much did you pay to each supplier?</div>
     <ngx-charts-bar-vertical
       [view]="view"
       [scheme]="colorScheme"
