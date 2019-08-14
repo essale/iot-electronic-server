@@ -53,15 +53,13 @@ export class CreateSupplierComponent implements OnInit {
     id = new FormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(30),
-        Validators.pattern('[א-תa-z:A-Z0-9_-\\s]*')
+        Validators.maxLength(30)
     ]);
 
     payment = new FormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(30),
-        Validators.pattern('[א-תa-z":A-Z0-9_-\\s]*')
+        Validators.maxLength(30)
     ]);
 
     constructor(

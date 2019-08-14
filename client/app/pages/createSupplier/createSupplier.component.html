@@ -56,11 +56,11 @@
                 <span matPrefix>
                     <i class="prefix fas fa-phone"></i>
                 </span>
-                <input matInput #phoneinput type="tel" minlength="2" maxlength="30" name="phoneNumber"
+                <input matInput #phoneinput type="tel" minlength="9" maxlength="10" name="phoneNumber"
                     [formControl]="phoneNumber" placeholder="Phone Number">
-                <mat-hint align="end">{{phoneinput.value?.length || 0}}/30</mat-hint>
+                <mat-hint align="end">{{phoneinput.value?.length || 0}}/10</mat-hint>
                 <mat-error *ngIf="phoneNumber.hasError('minlength')">
-                    Phone number must contain at least 2 characters
+                    Phone number must contain at least 9 characters and max of 10
                 </mat-error>
                 <mat-error *ngIf="phoneNumber.hasError('pattern')">
                     Phone number can contain only numbers
@@ -88,9 +88,6 @@
                     <mat-error *ngIf="id.hasError('minlength')">
                         Id pattern must contain at least 2 characters
                     </mat-error>
-                    <mat-error *ngIf="id.hasError('pattern')">
-                        Id pattern can contain only letters and numbers
-                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -102,9 +99,6 @@
                     <mat-hint align="end">{{payinput.value?.length || 0}}/30</mat-hint>
                     <mat-error *ngIf="payment.hasError('minlength')">
                         Payment pattern must contain at least 2 characters
-                    </mat-error>
-                    <mat-error *ngIf="payment.hasError('pattern')">
-                        Payment pattern can contain only letters and numbers
                     </mat-error>
                 </mat-form-field>
             </div>
