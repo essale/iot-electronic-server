@@ -9,17 +9,11 @@ import { AppComponent } from './app.component';
 import {
     AccountComponent,
     ConnectedComponent,
-    CreateSupplierComponent,
     HomeComponent,
-    InvoiceAnalyzerComponent,
-    CreateInvoiceComponent,
-    InvoicesComponent,
     LoginComponent,
     LogoutComponent,
     NotFoundComponent,
     SignupComponent,
-    StatisticsComponent,
-    SuppliersComponent,
     UsersComponent
 } from './pages';
 /** Services */
@@ -53,14 +47,8 @@ const PAGES = [
     LogoutComponent,
     AccountComponent,
     UsersComponent,
-    SuppliersComponent,
-    CreateSupplierComponent,
-    CreateInvoiceComponent,
     ConnectedComponent,
-    NotFoundComponent,
-    StatisticsComponent,
-    InvoiceAnalyzerComponent,
-    InvoicesComponent
+    NotFoundComponent
 ];
 
 @NgModule({
@@ -105,8 +93,7 @@ const PAGES = [
         RolesCountPipe,
         GoogleMapsAPIWrapper],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    bootstrap: [AppComponent],
-    entryComponents: [CreateSupplierComponent, CreateInvoiceComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule {

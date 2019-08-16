@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import {app} from './app';
 
 const enum WSReadyState {
     /** The connection is not yet open. */
@@ -11,6 +12,8 @@ const enum WSReadyState {
     CLOSED = 3
 }
 
+let onChange = false;
+
 export type WsUser = {
     ws: WebSocket;
     keepalive: any;
@@ -20,9 +23,9 @@ export type WsUser = {
     role: String;
 };
 
-let wsUsers: Array<WsUser> = [];
+const wsUsers: Array<WsUser> = [];
 
-let sendClientList = () => {
+const sendClientList = () => {
     // build users list
     let users = [];
     wsUsers.forEach(function (wsUser) {
@@ -36,35 +39,67 @@ let sendClientList = () => {
 
     wsUsers.forEach(function (client) {
         // send message to all admins
-        if (client.role === "admin" && client.ws.readyState == WSReadyState.OPEN) {
+        if (client.role === 'admin' && client.ws.readyState == WSReadyState.OPEN) {
             client.ws.send(JSON.stringify({
                 type: 'list',
                 message: users
             }));
         }
     });
-}
-let keepalive = (ws) => {
+};
+
+const sendSigList = (ws) => {
+    setInterval(function () {
+        userSigOnChange(ws);
+    }, 10000);
+};
+
+const userSigOnChange = (ws) => {
+    console.log(ws.readyState);
     if (ws.readyState == WSReadyState.OPEN) {
         ws.send(JSON.stringify({
-            type: 'keepalive',
-            message: ""
+            type: 'sig',
+            message: app.userSig
         }));
-    } else {
-        handleLogout(ws)
     }
+};
+
+function convertToSigUserList(userSig: any) {
+    const userSigList = [];
+    app.userSig.forEach(function (value, key) {
+        userSig = {username: key, amount: value};
+        userSigList.push(userSig);
+    });
+
+    return userSigList;
 }
 
-let ping = (ws) => {
+const keepalive = (ws) => {
+    if (ws.readyState == WSReadyState.OPEN) {
+
+        const sigUsers = convertToSigUserList(app.userSig);
+        console.log(sigUsers);
+
+        ws.send(JSON.stringify({
+            type: 'keepalive',
+            message: sigUsers
+        }));
+    } else {
+        handleLogout(ws);
+    }
+};
+
+
+const ping = (ws) => {
     if (ws.readyState == WSReadyState.OPEN) {
         ws.send(JSON.stringify({
             type: 'ping',
-            message: "pong"
+            message: 'pong'
         }));
     }
-}
+};
 
-let handleLogout = (ws) => {
+const handleLogout = (ws) => {
     wsUsers.forEach(function (client) {
         // remove disconnected users
         if (client.ws.readyState != WSReadyState.OPEN || ws === client.ws) {
@@ -73,26 +108,33 @@ let handleLogout = (ws) => {
         }
     });
     sendClientList();
-}
+};
 
-let handleLogin = (ws, token) => {
+const handleLogin = (ws, token) => {
     jwt.verify(token, process.env.SECRET_TOKEN, (err, decoded) => {
-        if (err) return;
+        if (err) {
+            return;
+        }
 
-        console.log("user connected", decoded.user.username)
+        console.log('user connected', decoded.user.username);
         wsUsers.push({
             ws: ws,
             keepalive: setInterval(function () {
                 keepalive(ws);
-            }, 2000),
+            }, 10000),
             id: decoded.user.id,
             username: decoded.user.username,
             email: decoded.user.email,
             role: decoded.user.role,
-        })
+        });
         sendClientList();
     });
-}
+};
+
+const handleSigAdd = (ws, msg) => {
+    console.log('sig list for users', app.userSig);
+    sendSigList(ws);
+};
 
 export default function setWebSocket(app) {
     app.ws('/ws', function (ws, req, next) {
@@ -100,15 +142,19 @@ export default function setWebSocket(app) {
         ws.on('message', function (data) {
             let msg = JSON.parse(data);
             switch (msg.type) {
-                case "login": {
+                case 'login': {
                     handleLogin(ws, msg.message);
                     break;
                 }
-                case "list": {
+                case 'sig': {
+                    handleSigAdd(ws, msg.message);
+                    break;
+                }
+                case 'list': {
                     sendClientList();
                     break;
                 }
-                case "ping": {
+                case 'ping': {
                     wsUsers.forEach(function (client) {
                         if (client.email === msg.message) {
                             ping(client.ws);

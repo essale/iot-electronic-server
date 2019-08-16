@@ -40,4 +40,7 @@ mongodb
     .catch(function (err) {
     console.error(err);
 });
+var HashMap = require('hashmap');
+var map = new HashMap();
+app.userSig = map;
 //# sourceMappingURL=app.js.map

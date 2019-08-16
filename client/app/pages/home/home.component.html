@@ -1,76 +1,40 @@
 <div class="container">
-  <br />
-  <br />
-  <div class="row" id="ex3">
-    <div class="col-md-10" id="app-table">
-      <div *ngIf="!auth.loggedIn" class="btn-wrap">
-        <button mat-raised-button routerLink="/login" routerLinkActive="active" color="accent">
-          <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-        <button mat-raised-button routerLink="/signup" routerLinkActive="active" color="accent">
-          <i class="fa fa-user-plus"></i> Signup
-        </button>
-      </div>
+    <app-toast [message]="toast.message"></app-toast>
 
-      <p>
-        Our system is designed to streamline the work of accountants.
-        The system streamlines the process of adding vendor invoices to the accounting system and uses a smart OCR which
-        will enter the relevant details from the invoice directly to the system.
-      </p>
+    <app-page-header [title]="title"></app-page-header>
+    <div class="row">
+        <div class="col-md-12 col-centered">
+            <div class="mat-elevation-z4">
+                <mat-table #table [dataSource]="dataSource" matSort>
 
-      <br>
-      <!-- youtube-->
-      <iframe width="1200" height="500" src="https://www.youtube.com/embed/-EoNrg_DR3s"></iframe>
+                    <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+                    <!-- Icon Column -->
+                    <ng-container matColumnDef="icon">
+                        <mat-header-cell *matHeaderCellDef class="icon-cell"></mat-header-cell>
+                        <mat-cell *matCellDef="" class="icon-cell">
+                            <i class="fa fa-user" style="color:rgb(24, 228, 24);"></i>
+                        </mat-cell>
+                    </ng-container>
 
-      <br>
-      <br>
-      <h1>About us </h1>
-      <br>
+                    <!-- Username Column -->
+                    <ng-container matColumnDef="username">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+                        <mat-cell *matCellDef="let sigUser"> {{sigUser.username}} </mat-cell>
+                    </ng-container>
 
-      <p>
-        Our office is located at - Tel hai 1 , Netanya <br>
-        You can contact us through our business Facebook page.<br>
-        You can also check out for a number of business articles in the field of accounting and the latest publications
-        in the field.<br>
-      </p>
-      <div class="row col-md-10" id="features">
-      <!--Map-->
-      
-      <div id="mamap">
-      <mat-list class="param-item" [colspan]="mapColNumber" [rowspan]="mapRowsNumber">
-        <agm-map #AgmMap (mapReady)="mapReady($event)" [(latitude)]="location.lat" [(longitude)]="location.lng"
-          [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [fitBounds]="true"> 
-          <agm-marker *ngFor="let element of markers" [latitude]="element.lat" [longitude]="element.lng"
-            [animation]="'DROP'" (markerClick)="AgmMap.lastOpen?.close(); AgmMap.lastOpen = infoWindow">
-            <agm-info-window #infoWindow>
-               
-              <strong>{{ element.label }}</strong>
-            </agm-info-window>
-          </agm-marker>
-        </agm-map>
-      </mat-list>
-      </div>
-      
-      <!--Facebook-->
-      <div>
-      <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>
-      <div class="fb-page" data-href="https://www.facebook.com/lirongorincpa/" data-tabs="timeline" data-width=""
-        data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
-        data-show-facepile="true">
-        <blockquote cite="https://www.facebook.com/lirongorincpa/" class="fb-xfbml-parse-ignore">
-          <a href="https://www.facebook.com/lirongorincpa/"> ‎</a></blockquote>
-      </div>
-      </div>
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="amount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+                        <mat-cell *matCellDef="let sigUser"> {{sigUser.amount}} </mat-cell>
+                    </ng-container>
 
-
-      <iframe
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Flirongorincpa%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-        width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-        allowTransparency="true" allow="encrypted-media"></iframe>
-      </div>
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
     </div>
-  </div>
+
 </div>
