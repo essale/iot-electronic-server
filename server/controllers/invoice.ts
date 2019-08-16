@@ -1,6 +1,7 @@
 import BaseCtrl from './base';
 import Invoice from '../models/invoice';
 import * as tessarect from './ocr/tessarect';
+import { logger } from '../helpers/logger';
 const fs = require('fs');
 
 
@@ -24,7 +25,8 @@ export default class InvoiceCtrl extends BaseCtrl {
 
         fs.writeFile(imagePath, base64Data, 'base64', function (err) {
             if (err != null) {
-                return res.status(400);
+                logger.error(err);
+                return err.status(400);
             }
             tessarect.all.textFromImage(imagePath, req.body.lang);
             // logger.info('Image as text: ' + textStr);

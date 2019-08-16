@@ -52,13 +52,6 @@ export class ConnectedComponent implements OnInit {
     });
   }
 
-  message(user) {
-    this.chatService.messages.next({
-      type: 'message1',
-      message: user.email
-    });
-  }
-
   ping(user) {
     this.chatService.messages.next({
       type: 'ping',

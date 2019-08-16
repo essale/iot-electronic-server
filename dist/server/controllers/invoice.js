@@ -4,6 +4,7 @@ var tslib_1 = require("tslib");
 var base_1 = require("./base");
 var invoice_1 = require("../models/invoice");
 var tessarect = require("./ocr/tessarect");
+var logger_1 = require("../helpers/logger");
 var fs = require('fs');
 var InvoiceCtrl = /** @class */ (function (_super) {
     tslib_1.__extends(InvoiceCtrl, _super);
@@ -23,7 +24,8 @@ var InvoiceCtrl = /** @class */ (function (_super) {
             var imagePath = folderPath + '/' + req.body.imageName;
             fs.writeFile(imagePath, base64Data, 'base64', function (err) {
                 if (err != null) {
-                    return res.status(400);
+                    logger_1.logger.error(err);
+                    return err.status(400);
                 }
                 tessarect.all.textFromImage(imagePath, req.body.lang);
                 // logger.info('Image as text: ' + textStr);

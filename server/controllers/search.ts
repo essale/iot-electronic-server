@@ -10,9 +10,8 @@ abstract class SearchCtrl {
 
     // Get all
     groupBy = async (modelType, userName, groupParameter) => {
-        console.log('userName: ',userName);
-        console.log('modelType: ',modelType);
-        console.log('groupParameter: ', groupParameter);
+        console.log(userName);
+        console.log(groupParameter);
 
         switch (modelType) {
             case modelTypeEnum.INVOICE: {
@@ -33,9 +32,8 @@ abstract class SearchCtrl {
             // { $match: { username: userName } },
             {
                 $group: {
-                    _id: `$${groupParameter}`, // grouping key - group by field district
-                    totalPayment: { $sum: { $multiply: [ "$totalPayment" ] } },
-                    totalInvoices: {$sum: 1}
+                    _id: groupParameter, // grouping key - group by field district
+                    flatsCount: {$sum: 1}
                 }
             }
         );
@@ -46,7 +44,8 @@ abstract class SearchCtrl {
     }
 
     setRetVal = function (data) {
-        console.log('retVal: ', data);
+        console.log("GGGG");
+        console.log(data);
 
         this.retVal = data;
     };

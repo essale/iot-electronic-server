@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { MapsAPILoader, AgmMap, GoogleMapsAPIWrapper } from '@agm/core';
-import { SupplierService } from '../../../app/services/supplier.service'
+import { MapsAPILoader, AgmMap } from '@agm/core';
 
 declare var google: any;
 
@@ -34,11 +33,11 @@ export class HomeComponent {
 
   // User Selected Location (initialize to center of Israel)
   public location: Location = {
-    lat: 32.314528,
-    lng: 34.862023,
+    lat: 31.0461,
+    lng: 34.8516,
     marker: {
-      lat: 32.314528,
-      lng: 34.862023,
+      lat: 31.0461,
+      lng: 34.8516,
       draggable: true
     },
     zoom: 7,
@@ -54,27 +53,14 @@ export class HomeComponent {
   constructor(
     public auth: AuthService,
     public mapsApiLoader: MapsAPILoader,
-    private supplierService: SupplierService,
   ) {
     this.mapsApiLoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder();
     });
   }
 
-  mapReady($event: any) {
+  findLocation(address) {
     this.markers = []
-    this.supplierService.getSuppliers().subscribe(
-      suppliers => {
-        suppliers.forEach(element => {
-          this.findLocation(element.address, element.supplierName);
-      })
-      },
-      error => console.log(error)
-    );
-  }
-
-  findLocation(address, label = new String()) {
-    console.info("placing marker on: " + address);
     if (!this.geocoder) this.geocoder = new google.maps.Geocoder()
     this.geocoder.geocode({
       'address': address
@@ -89,11 +75,12 @@ export class HomeComponent {
           this.location.marker.draggable = true;
           this.location.viewport = results[0].geometry.viewport;
 
+          this.markers = []
+
           this.markers.push({
             lat: results[0].geometry.location.lat(),
             lng: results[0].geometry.location.lng(),
-            draggable: false,
-            label: label.toString()
+            draggable: true
           });
           this.map.triggerResize(false);
         }
