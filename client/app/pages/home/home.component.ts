@@ -17,7 +17,7 @@ import {Observable} from 'rxjs';
 export class HomeComponent implements OnInit {
     @ViewChild(AgmMap)
     map: AgmMap;
-    displayedColumns = ['icon', 'username', 'amount'];
+    displayedColumns = ['icon', 'username', 'amount of flows', 'amount of cigares'];
     dataSource: any;
     users: SigUser[];
     alive: boolean;

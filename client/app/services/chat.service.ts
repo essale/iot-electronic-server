@@ -4,7 +4,7 @@ import {WebsocketService} from './websocket.service';
 import {ToastComponent} from '../shared/toast/toast.component';
 
 
-const CHAT_URL = 'ws://localhost:4200/ws';
+const CHAT_URL = 'ws://0.0.0.0:4200/ws';
 
 export interface Message {
     type: string,

@@ -32,7 +32,7 @@ mongodb
     routes_1.default(app);
     websocket_1.default(app);
     if (!module.parent) {
-        app.listen(app.get('port'), function () {
+        app.listen(app.get('port'), '0.0.0.0', function () {
             console.log('Server listening on port ' + app.get('port'));
         });
     }

@@ -36,7 +36,7 @@ mongodb
         setWebSocket(app);
 
         if (!module.parent) {
-            app.listen(app.get('port'), () => {
+            app.listen(app.get('port'), '0.0.0.0', () => {
                 console.log('Server listening on port ' + app.get('port'));
             });
         }
