@@ -1,0 +1,7 @@
+<application>
+  <component name="GithubAccounts">
+    <account id="d3ce709e-9c32-4246-95cf-cf225101a2e8" name="itaySpot">
+      <server useHttp="false" host="github.com" />
+    </account>
+  </component>
+</application>
